@@ -120,20 +120,6 @@
               "category": "Appliances",
               "stock_quantity": 70
             }
-          ],
-          "users": [
-            {
-              "username": "Boom",
-              "password": "Boom@123"
-            },
-            {
-              "username": "Bhavana",
-              "password": "Bhavana@123"
-            },
-            {
-              "username": "nidhi",
-              "password": "111"
-            }
           ]
           
 }

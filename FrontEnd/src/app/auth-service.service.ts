@@ -10,41 +10,21 @@ export class AuthServiceService {
 
   private url = 'https://jsonplaceholder.typicode.com';
 
-//   constructor(private http: HttpClient) { }
-
-//   getPosts(): Promise<any> {
-//     return this.http.get(`${this.url}/users`).toPromise();
-//   }
-// }
-
-private loggedIn = false;
+  private loggedIn = false;
 
   constructor(private http: HttpClient) {}
 
-  // login(username: string, city: string): Observable<any> {
-  //   const loginData = { username, city };
-  //   // Simulate a login request (replace with actual API call)
-  //   // Here, we're assuming a successful login sets loggedIn to true
-  //   return of('/api/login', loginData).pipe(
-  //     tap(() => {
-  //       this.loggedIn = true;
-  //       console.log("logged in..");
-  //     })
-  //   );
-  // }
-
   logout(): void {
-    // Clear user token and any stored user data
     this.loggedIn = false;
   }
 
   isLoggedIn(): boolean {
-    // Check if the user is logged in based on token existence
     return this.loggedIn;
   }
 
   loginUser(user: User): Observable<object>{
     console.log(user);
+    this.loggedIn = true; // assuming
     return this.http.post(`${this.url}/users`, user);
   }
   

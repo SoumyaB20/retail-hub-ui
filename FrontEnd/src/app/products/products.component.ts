@@ -13,24 +13,15 @@ export class ProductsComponent {
   constructor(private prodService: ProductService) {
     
   }
-  
-//   ngOnInit(){
-//   this.prodService.showProducts().subscribe(data=>{
-//     this.list=data;
-//   },error=> console.log(error)
-//   );
 
-// }
-
-async ngOnInit(): Promise<void> {
-  try {
-    const data = await this.prodService.showProducts();
-    console.log(data);
-
-    this.list = data;
-  } catch (error) {
-    console.error('An error occurred:', error);
-}}
+  async ngOnInit(): Promise<void> {
+    try {
+      const data = await this.prodService.showProducts();
+      console.log(data);
+      this.list = data;
+    } catch (error) {
+      console.error('An error occurred:', error);
+  }}
 
 
 }

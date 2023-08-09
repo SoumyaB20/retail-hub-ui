@@ -1,11 +1,11 @@
 
 <div class="box-example">
-    <h2 style="color: white;">Login</h2>
+    <h2>Login</h2>
     <form (ngSubmit)="OnSubmit()">
-      <label for="username" style="color: white;">Username:</label>
+      <label for="username" >Username:</label>
       <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
       <br>
-      <label for="password" style="color: white;">Password:</label>
+      <label for="password">Password:</label>
       <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
       <br>
       <button type="submit">Login</button>
