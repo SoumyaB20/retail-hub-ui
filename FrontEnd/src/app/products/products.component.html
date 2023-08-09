@@ -1,16 +1,7 @@
-<!-- <p>products works!</p>
-<div *ngFor="let product of products" class="product-card">
-    <img [src]="product.image" alt="{{ product.name }}">
-    <h3>{{ product.name }}</h3>
-    <p>{{ product.price | currency }}</p>
-  </div>
-   -->
-
    <h1>Product List:</h1>
-   <div *ngFor="let product of list" class="products">
+   <h2>Electronics Category:</h2>
+   <div *ngFor="let product of electronicsProducts" class="products">
     <div class="box">
-    <!-- <img [src]="product.image" alt="{{ product.name }}"> -->
-    <!-- <h4>product_id: {{ product.product_id }}</h4> -->
     <ul><h4>{{ product.product_name }}</h4></ul>
     <p>{{ product.description }}</p>
     <p>${{ product.price }}</p>
@@ -18,3 +9,51 @@
     <p>Qunatity Left : {{ product.stock_quantity }}</p>
    </div>
   </div>
+
+  <h2>Fashion:</h2>
+  <div *ngFor="let product of fashionProducts" class="products">
+    <div class="box">
+    <ul><h4>{{ product.product_name }}</h4></ul>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+    <p>{{ product.category }}</p>
+    <p>Qunatity Left : {{ product.stock_quantity }}</p>
+   </div>
+  </div>
+
+  <h2>appliances:</h2>
+  <div *ngFor="let product of appliances " class="products">
+    <div class="box">
+    <ul><h4>{{ product.product_name }}</h4></ul>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+    <p>{{ product.category }}</p>
+    <p>Qunatity Left : {{ product.stock_quantity }}</p>
+   </div>
+  </div>
+
+
+  <h2>kitchenware:</h2>
+  <div *ngFor="let product of kitchenware " class="products">
+    <div class="box">
+    <ul><h4>{{ product.product_name }}</h4></ul>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+    <p>{{ product.category }}</p>
+    <p>Qunatity Left : {{ product.stock_quantity }}</p>
+   </div>
+  </div>
+  
+  <h2>accessories:</h2>
+  <div *ngFor="let product of accessories " class="products">
+    <div class="box">
+    <ul><h4>{{ product.product_name }}</h4></ul>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+    <p>{{ product.category }}</p>
+    <p>Qunatity Left : {{ product.stock_quantity }}</p>
+   </div>
+  </div>
+
+
+  

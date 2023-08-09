@@ -1,10 +1,4 @@
-/* .home{
-    display: flex; 
-    justify-content: center;
-    border:1px solid;
-  
-  }
-     */
+
     .products .box {
         border:2px solid rgb(181, 53, 18);
         padding :1rem 1rem;
@@ -16,21 +10,3 @@
     font: size 5px;
      }
 
-     /* .products1.box {
-        border:2px solid rgb(181, 53, 18);
-        padding :1rem 1rem;
-        background: rgba(157, 202, 180, 0.288);
-        box-shadow:var(--box-shaddow);
-     }
-     .products2 .box {
-        border:2px solid rgb(181, 53, 18);
-        padding :1rem 1rem;
-        background: rgba(157, 202, 180, 0.288);
-        box-shadow:var(--box-shaddow);
-     }
-     .products3 .box {
-        border:2px solid rgb(181, 53, 18);
-        padding :1rem 1rem;
-        background: rgba(157, 202, 180, 0.288);
-        box-shadow:var(--box-shaddow);
-     } */
