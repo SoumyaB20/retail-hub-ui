@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { User } from '../data-type';
 
@@ -11,7 +12,7 @@ export class LoginComponent {
   
   user:User= new User();
 
-  constructor(private authService: AuthServiceService) {}
+  constructor(private authService: AuthServiceService, private router:Router) {}
 
   // onSubmit(): void {
   //   this.authService.login(this.username, this.password).subscribe(
@@ -36,8 +37,9 @@ export class LoginComponent {
 OnSubmit(){
   console.log(this.user);
   this.authService.loginUser(this.user).subscribe(data=>{
+    console.log(data);
     alert("login sucessfully");
-    
+    this.router.navigate(['/product'])
   },error=> alert("please enter correct userId and password")
   );
 }

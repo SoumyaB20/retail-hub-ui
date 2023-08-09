@@ -1,0 +1,139 @@
+{
+    "products":[
+            {
+              "product_id": 1,
+              "product_name": "Laptop",
+              "price": 999.99,
+              "description": "High-performance laptop with SSD",
+              "category": "Electronics",
+              "stock_quantity": 50
+            },
+            {
+              "product_id": 2,
+              "product_name": "Smartphone",
+              "price": 599.99,
+              "description": "Latest model with advanced features",
+              "category": "Electronics",
+              "stock_quantity": 100
+            },
+            {
+              "product_id": 3,
+              "product_name": "Running Shoes",
+              "price": 89.95,
+              "description": "Comfortable shoes for running",
+              "category": "Fashion",
+              "stock_quantity": 200
+            },
+            {
+              "product_id": 4,
+              "product_name": "Kitchen Blender",
+              "price": 49.99,
+              "description": "Powerful blender for smoothies",
+              "category": "Appliances",
+              "stock_quantity": 75
+            },
+            {
+              "product_id": 5,
+              "product_name": "T-shirt",
+              "price": 19.99,
+              "description": "Casual cotton t-shirt",
+              "category": "Fashion",
+              "stock_quantity": 300
+            },
+            {
+              "product_id": 6,
+              "product_name": "Headphones",
+              "price": 149.99,
+              "description": "Noise-canceling headphones",
+              "category": "Electronics",
+              "stock_quantity": 80
+            },
+            {
+              "product_id": 7,
+              "product_name": "Backpack",
+              "price": 39.95,
+              "description": "Durable backpack for everyday use",
+              "category": "Accessories",
+              "stock_quantity": 150
+            },
+            {
+              "product_id": 8,
+              "product_name": "Coffee Maker",
+              "price": 79.99,
+              "description": "Automatic drip coffee maker",
+              "category": "Appliances",
+              "stock_quantity": 60
+            },
+            {
+              "product_id": 9,
+              "product_name": "Sneakers",
+              "price": 109.95,
+              "description": "Stylish sneakers for casual wear",
+              "category": "Fashion",
+              "stock_quantity": 180
+            },
+            {
+              "product_id": 10,
+              "product_name": "Smart Watch",
+              "price": 129.99,
+              "description": "Fitness and health tracking",
+              "category": "Electronics",
+              "stock_quantity": 120
+            },
+            {
+              "product_id": 11,
+              "product_name": "Frying Pan",
+              "price": 29.99,
+              "description": "Non-stick frying pan",
+              "category": "Kitchenware",
+              "stock_quantity": 90
+            },
+            {
+              "product_id": 12,
+              "product_name": "Jeans",
+              "price": 49.95,
+              "description": "Classic denim jeans",
+              "category": "Fashion",
+              "stock_quantity": 250
+            },
+            {
+              "product_id": 13,
+              "product_name": "Wireless Mouse",
+              "price": 24.99,
+              "description": "Ergonomic wireless mouse",
+              "category": "Electronics",
+              "stock_quantity": 110
+            },
+            {
+              "product_id": 14,
+              "product_name": "Water Bottle",
+              "price": 12.95,
+              "description": "Reusable stainless steel water bottle",
+              "category": "Accessories",
+              "stock_quantity": 220
+            },
+            {
+              "product_id": 15,
+              "product_name": "Toaster",
+              "price": 34.99,
+              "description": "2-slice toaster with adjustable settings",
+              "category": "Appliances",
+              "stock_quantity": 70
+            }
+          ],
+          "users": [
+            {
+              "username": "Boom",
+              "password": "Boom@123"
+            },
+            {
+              "username": "Bhavana",
+              "password": "Bhavana@123"
+            },
+            {
+              "username": "nidhi",
+              "password": "111"
+            }
+          ]
+          
+}

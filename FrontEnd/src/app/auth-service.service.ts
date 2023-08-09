@@ -47,4 +47,5 @@ private loggedIn = false;
     console.log(user);
     return this.http.post(`${this.url}/users`, user);
   }
+  
 }
