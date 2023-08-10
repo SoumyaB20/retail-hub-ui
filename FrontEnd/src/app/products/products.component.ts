@@ -33,5 +33,7 @@ export class ProductsComponent {
       console.error('An error occurred:', error);
   }}
 
+  
+
 
 }
