@@ -11,3 +11,11 @@ export class Product{
     category!: string;
     stock_quantity!: number;
 }
+
+export class Cart{
+    product_id! : number;
+    username!: String;
+    product_name!: string;
+    price! : number;
+    NoOfItems! : number;
+}

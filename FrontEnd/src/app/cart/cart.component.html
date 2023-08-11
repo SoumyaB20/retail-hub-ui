@@ -1,0 +1,29 @@
+<div style="align-content:center">
+    <h1>Cart Details:</h1>
+  <div class="container">
+  <table class="demo table-striped" border="1" cellspacing="0" cellpadding="20" id="customers">
+    <tr>
+      <th>Id</th>
+      <th>Product</th>
+      <th>No of Items</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let data of cartDetails">
+      <td>{{data.product_id}}</td>
+      <td style="width:30%">{{data.product_name}} </td>
+      <td style="text-align:center"><button (click)="decreaseQuantity(data.product_id, data.NoOfItems)">-</button>
+        {{data.NoOfItems}}<button (click)="increaseQuantity(data.product_id, data.NoOfItems)">+</button>
+        </td>
+      <td style="text-align:right">${{data.price}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:right">Total: ${{total}}</td>
+    </tr>
+  </table>
+  </div>
+  </div>
+
+  

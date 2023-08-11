@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../data-type';
 import { ProductService } from '../product.service';
 
@@ -17,7 +18,8 @@ export class ProductsComponent {
   kitchenware: any[] = [];
   appliances: any[] = [];
 
-  constructor(private prodService: ProductService) {}
+  cUser="ni";
+  constructor(private prodService: ProductService, private route:ActivatedRoute,private router:Router) {}
 
   async ngOnInit(): Promise<void> {
     try {
@@ -33,7 +35,20 @@ export class ProductsComponent {
       console.error('An error occurred:', error);
   }}
 
-  
+  OnCart(){
+    this.router.navigate(['/cart',this.cUser])
+  }
+
+  addCart(n: any){
+   
+    
+    console.log((n));
+    //send it to backend sucessfully
+    alert("item added to cart");
+    
+  }  
+
+  //fetch userid and retrive it till the end
 
 
 }

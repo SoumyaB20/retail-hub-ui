@@ -120,6 +120,32 @@
               "category": "Appliances",
               "stock_quantity": 70
             }
-          ]
+          ],
+
+        "cart" :[ {
+            "product_id": 15,
+            "username": "ni",
+            "product_name": "Toaster",
+            "price": 34.99,
+            "NoOfItems": 1
+          },
+          {
+            "product_id": 16,
+            "username": "ni",
+            "product_name": "Water Bottle",
+            "price": 34.99,
+            "NoOfItems": 1
+          },
+          {
+            "product_id": 19,
+            "username": "ni",
+            "product_name": "Jeans",
+            "price": 34.99,
+            "NoOfItems": 2
+          }
+
+        ]
+
+
           
 }
