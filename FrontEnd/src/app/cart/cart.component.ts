@@ -47,5 +47,17 @@ export class CartComponent {
     console.log("sending api to backend to increase: "+id + "number of items present:" + NoOfItems );
     //considering it as successful  
   }
+  deleteOrder(){
+    this.cartService.deleteCartForUser(this.cUser).subscribe(
+      () => {
+        console.log('Cart deleted successfully.');
+        // Perform any additional actions after successful deletion
+      },
+      error => {
+        console.error('Error deleting cart:', error);
+        // Handle error scenarios
+      }
+    );
+  }
 }
 

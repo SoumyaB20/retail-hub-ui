@@ -19,4 +19,13 @@ export class CartServiceService {
     console.log(c);
     return this.http.post(`${this.url}/cart`, c);
   }
+
+  deleteCartForUser(userId: string): Observable<any> {
+    const url = `${this.url}/cart?username=${userId}`;
+    return this.http.delete(url);
+    // const url = `${this.url}/cart/`;
+    // console.log(url);
+    // return this.http.delete(url);
+  }
+  
 }

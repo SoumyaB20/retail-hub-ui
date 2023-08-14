@@ -169,4 +169,18 @@
         height: 40px;
         width: 60px;
       }
-      
+      .btn1{
+
+        margin-right: 70px;
+        background-color: #133b5c;
+        height: 40px;
+        width: 60px;
+        }
+        
+        .btn2{
+        
+        margin-left: 70px;
+        background-color: #133b5c;
+        height: 40px;
+        width: 60px;
+        }

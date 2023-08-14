@@ -9,6 +9,8 @@ import { ProductService } from '../product.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
+
+ 
   product:Product= new Product();
   // list!:any;
   allProducts: any[] = []; // Your array containing all products
@@ -39,14 +41,26 @@ export class ProductsComponent {
     this.router.navigate(['/cart',this.cUser])
   }
 
-  addCart(n: any){
-   
+  // addCart(n: any){
+  //   console.log((n));
+  //   //send it to backend sucessfully
+  //   alert("item added to cart");
     
-    console.log((n));
-    //send it to backend sucessfully
-    alert("item added to cart");
-    
-  }  
+  // }  
+  isLoading: boolean = false;
+
+  addCart(n:any) {
+    n.isLoading = true;
+
+    // Simulate an API call (replace with your actual API call)
+    setTimeout(() => {
+      // After the API call is done, hide the spinner
+      n.isLoading = false;
+      alert("item added to cart");
+    }, 1000); // Simulating a 2-second API call
+  }
+
+  
 
   //fetch userid and retrive it till the end
 
