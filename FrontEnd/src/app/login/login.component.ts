@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
@@ -14,14 +15,23 @@ export class LoginComponent {
 
   constructor(private authService: AuthServiceService, private router:Router) {}
 
+  
   OnSubmit(){
     // console.log(this.user);
-    this.authService.loginUser(this.user).subscribe(data=>{
-      console.log(data);
-      alert("login sucessfully");
-      this.router.navigate(['/product'])
-    },error=> {alert("please enter correct userId and password");
-            console.error(error)}
-    );
+    this.authService.loginUser(this.user)
+  .subscribe(
+    (response: string) => {
+      
+        console.log(response);
+        if(response==="User Exists")
+        alert("login sucessfully");
+        this.router.navigate(['/product'])
+    },
+    (error: HttpErrorResponse) => {
+      alert("Invalid username or password");
+      console.error('HTTP error:', error);
+    }
+  );
   }
 }
+

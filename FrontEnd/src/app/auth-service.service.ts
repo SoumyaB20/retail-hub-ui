@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { User } from './data-type';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { User } from './data-type';
 })
 export class AuthServiceService {
 
-  private url = 'https://jsonplaceholder.typicode.com';
+  private url = 'http://localhost:8080/product-management-service/user/authentication';
 
   private loggedIn = false;
 
@@ -22,10 +22,16 @@ export class AuthServiceService {
     return this.loggedIn;
   }
 
-  loginUser(user: User): Observable<object>{
+  loginUser(user: User): Observable<any>{
     console.log(user);
-    this.loggedIn = true; // assuming
-    return this.http.post(`${this.url}/users`, user);
-  }
+    const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+    
+    // this.loggedIn = true; // assuming
+    // return this.http.post(`${this.url}/users`, user);
+  //   return this.http.get<string>(`${this.url}/${user.username}?password=${user.password}`)
+  // }
+
+  return this.http.get(`${this.url}/${user.username}?password=${user.password}`, { responseType: 'text' })
   
+}
 }

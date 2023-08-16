@@ -7,12 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private url="http://localhost:3000";
+  private url="http://localhost:8080/product-management-service/product/product-details";
   constructor(private http:HttpClient) { }
 
+  private authToken = '';
+  setAuthToken(token: string) {
+    this.authToken = token;
+  }
 
   showProducts(): Promise<any> {
-    return this.http.get(`${this.url}/products`).toPromise();
+    
+    console.log("called");
+    return this.http.get(`${this.url}`).toPromise();
   }
   
 
