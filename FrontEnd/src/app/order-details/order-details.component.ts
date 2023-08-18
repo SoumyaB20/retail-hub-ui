@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 
 @Component({
@@ -10,15 +10,18 @@ import { CartServiceService } from '../cart-service.service';
 export class OrderDetailsComponent {
   orderDetails: any[] = [];
   orderId!: any;
-
+  total!:any;
   constructor(
     private route: ActivatedRoute,
-    private orderService: CartServiceService
+    private orderService: CartServiceService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.orderId = parseInt(params.get('orderId') || '', 10);
+      this.orderId = params.get('Oid');
+      // this.total = parseInt(params.get('total') || '', 10);
+      this.total = params.get('total') ;
       this.fetchOrderDetails();
     });
   }
@@ -37,5 +40,8 @@ export class OrderDetailsComponent {
       }
     );
     // }
+  }
+    OrdersPage() {
+    this.router.navigate(['/orders']);
   }
 }

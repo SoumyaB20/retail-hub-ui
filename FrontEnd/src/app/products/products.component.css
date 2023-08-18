@@ -169,10 +169,16 @@ h1 {
 }
 
 .btn2 {
-  margin-left: 70px;
+  padding: 8px 25px;
+  margin-right: 70px;
   background-color: #133b5c;
   height: 40px;
-  width: 60px;
+  font-size: large;
+  left: 50px;
+  top: -5px;
+  position: relative;
+
+  text-align: center;
 }
 
 .btn3 {

@@ -14,45 +14,45 @@
         <th>No of Items</th>
         <th>Price</th>
       </tr>
-      <tr *ngFor="let data of cartDetails">
+      <tr *ngFor="let data of cartDetails ; let i = index">
         <td>{{ data.product_id }}</td>
         <td style="width: 30%">{{ data.product_name }}</td>
         <td style="text-align: center">
           <button
             style="border-color: white; width: 20px"
-            (click)="decrementValue()"
+            (click)="decrementValue(i)"
             value="-"
           >
             -
           </button>
           <input
             type="text"
-            value="1"
+            [value]="data.NoOfItems"
             maxlength="2"
             max="10"
             size="1"
             id="number"
           /><button
             style="border-color: white; width: 20px"
-            (click)="incrementValue()"
+            (click)="incrementValue(i)"
             value="+"
           >
             +
           </button>
         </td>
-        <td style="text-align: right">${{ data.price * data.NoOfItems }}</td>
+        <td style="text-align: right">${{ data.price * data.NoOfItems | number:'1.2-2'  }}</td>
       </tr>
       <tr>
         <td></td>
         <td></td>
         <td></td>
-        <td style="text-align: right">Total: ${{ total }}</td>
+        <td style="text-align: right">Total: ${{ calculateTotal() | number:'1.2-2'  }}</td>
       </tr>
     </table>
   </div>
   <br />
   <button
-    (click)="deleteProduct(1)"
+    (click)="deleteProduct()"
     class="btn1 btn btn-lg"
     style="border-color: rgb(255, 255, 255)"
   >

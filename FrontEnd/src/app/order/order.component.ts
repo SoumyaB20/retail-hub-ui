@@ -29,8 +29,8 @@ export class OrderComponent {
     );
   }
 
-  view(order_id: any) {
-    this.router.navigate(['/orderDetails', order_id]);
+  view(order_id: any, total:any) {
+    this.router.navigate(['/orderDetails', order_id, total]);
   }
   productPage() {
     this.router.navigate(['/product']);

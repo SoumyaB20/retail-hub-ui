@@ -8,12 +8,12 @@ import { Cart } from './data-type';
   providedIn: 'root',
 })
 export class CartServiceService {
-  private url = 'http://localhost:3000';
+  
   constructor(
     private http: HttpClient,
     private userService: AuthServiceService
   ) {}
-
+  private url = 'http://localhost:3000';
   showCart(): Observable<any> {
     return this.http.get(`${this.url}/cart`);
   }
@@ -24,16 +24,15 @@ export class CartServiceService {
   // }
 
   // private url="http://localhost:9091/order-management-service/order";
-  // constructor(private http: HttpClient, private userService:AuthServiceService) { }
 
   // showCart(): Observable<any> {
   //   const userId = this.userService.getUserId;
   //   return this.http.get(`${this.url}/cart-details?userId=${userId}`);
   // }
 
-  deleteProductForUser(productId: number): Observable<any> {
+  deleteProductForUser(orderId: any): Observable<any> {
     const userId = this.userService.getUserId;
-    const url = `${this.url}/delete-order?userId=${userId}?productId=${productId}`;
+    const url = `${this.url}/delete-order?userId=${userId}?orderId=${orderId}`;
     return this.http.delete(url);
   }
 
@@ -42,10 +41,10 @@ export class CartServiceService {
     return this.http.post(`${this.url}/cart`, c);
   }
 
-  postOrder(orderData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.http.post(`${this.url}/api/orders`, orderData, { headers });
+  sendOrderApproved(orderId: any, total: any): Observable<any> {
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // return this.http.post(`${this.url}/api/orders`, orderData, { headers });
+    return this.http.post(`${this.url}/api/orders`, total);
   }
   updateOrderStatus(orderId: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

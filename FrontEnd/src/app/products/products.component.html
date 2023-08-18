@@ -115,9 +115,9 @@
         <!-- <th>#</th> -->
         <th>Id</th>
         <th>Product</th>
+        <th>Category</th>
         <th>Stock</th>
         <th>Price</th>
-        <th>Category</th>
         <th>Add Item</th>
       </tr>
       <tr
@@ -154,9 +154,9 @@
             </svg>
           </button>
         </td>
+        <td>{{ data.productCategory }}</td>
         <td style="text-align: right">{{ data.productStockQuantity }}</td>
         <td style="text-align: right">${{ data.productPrice }}</td>
-        <td>{{ data.productCategory }}</td>
         <td style="text-align: center">
           <button [disabled]="isLoading" (click)="addCart(data)" id="addToCart">
             Add to cart
@@ -167,8 +167,8 @@
     </table>
   </div>
   <br />
-  <button class="btn1 btn btn-lg btn-primary">Prev</button>
-  <button class="btn2 btn btn-lg btn-primary">Next</button>
+  <!-- <button class="btn1 btn btn-lg btn-primary">Prev</button> -->
+  <button class="btn2 btn btn-lg btn-primary" (click)="OnCart()">View Cart</button>
   <br />
   <br />
 </div>

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'product', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrderComponent },
-  { path: 'orderDetails/:Oid', component: OrderDetailsComponent },
+  { path: 'orderDetails/:Oid/:total', component: OrderDetailsComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

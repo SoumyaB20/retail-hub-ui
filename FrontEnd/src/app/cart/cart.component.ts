@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 import { Cart } from '../data-type';
 
@@ -15,6 +15,8 @@ export class CartComponent {
   ) {}
 
   total!: any;
+  sendTotal!:any;
+  orderId!:number;
   cartDetails: any[] = [];
   cart: Cart = new Cart();
 
@@ -30,7 +32,10 @@ export class CartComponent {
         console.log(this.cartDetails);
         this.cartDetails = response;
         console.log(this.cartDetails);
-        this.total = this.cartDetails.reduce(
+        for (const cartItem of this.cartDetails) {
+           this.orderId = cartItem.orderId;
+        }
+        this.sendTotal = this.cartDetails.reduce(
           (sum, item) => sum + item.price * item.NoOfItems,
           0
         );
@@ -41,8 +46,8 @@ export class CartComponent {
     );
   }
 
-  deleteProduct(productId: number) {
-    this.cartService.deleteProductForUser(productId).subscribe(
+  deleteProduct() {
+    this.cartService.deleteProductForUser(this.orderId).subscribe(
       () => {
         console.log('Cart deleted successfully.');
         this.fetchCartDetails();
@@ -56,7 +61,7 @@ export class CartComponent {
   submitOrder() {
     alert('your order has been successfully placed');
     this.router.navigate(['/product']);
-    this.cartService.postOrder(this.cartDetails).subscribe(
+    this.cartService.sendOrderApproved(this.orderId, this.sendTotal).subscribe(
       (response) => {
         console.log('Order successfully submitted:', response);
         this.router.navigate(['/product']);
@@ -67,6 +72,27 @@ export class CartComponent {
     );
   }
 
-  incrementValue() {}
-  decrementValue() {}
+   
+
+  decrementValue(index: number): void {
+    if (this.cartDetails[index].NoOfItems > 1) {
+      this.cartDetails[index].NoOfItems--;
+      this.calculateTotal();
+    }
+  }
+
+  incrementValue(index: number): void {
+    if (this.cartDetails[index].NoOfItems < 10) {
+      this.cartDetails[index].NoOfItems++;
+      this.calculateTotal();
+    }
+  }
+
+  calculateTotal(): number {
+    this.total = this.cartDetails.reduce(
+      (acc, item) => acc + item.price * item.NoOfItems,
+      0
+    );
+    return this.total;
+  }
 }

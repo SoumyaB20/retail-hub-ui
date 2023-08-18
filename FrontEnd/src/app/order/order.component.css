@@ -72,3 +72,6 @@ td span {
   position: relative;
   text-align: center;
 }
+* {
+  font-family: Tahoma, sans-serif;
+}

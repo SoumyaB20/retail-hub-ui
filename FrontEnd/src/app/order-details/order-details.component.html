@@ -3,26 +3,41 @@
       <div class="col">
         <h2>Order Details</h2>
         <hr>
-  
+        <h3>Your Order ID is: {{orderId}} </h3>
+        <hr>
         <div class="table-responsive">
           <table class="table table-bordered table-hover" id="customers">
             <thead class="thead-dark">
               <tr>
-                <th style="text-align:center">Product ID</th>
-                <th style="text-align:center">Quantity</th>
-                <th style="text-align:center">Price</th>
+                <th>Serial No</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
               </tr>
             </thead>
-            <tbody style="text-align:right">
+            <tbody>
               <tr *ngFor="let detail of orderDetails">
-                <td>{{ detail.product_id }}</td>
-                <td>{{ detail.quantity }}</td>
-                <td >${{detail.price}}</td>
+                <td style="text-align: right;">{{ detail.serial_no }}</td>
+                <td style="text-align: right;">{{ detail.product_id }}</td>
+                <td>{{ detail.product_name }}</td>
+                <td style="text-align: right;">{{ detail.quantity }}</td>
+                <td style="text-align: right;">${{detail.price}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">Total: ${{total}}</td>
               </tr>
             </tbody>
+            
           </table>
         </div>
       </div>
     </div>
   </div>
+  <button class="btn btn-primary btn3" (click)="OrdersPage()">Back</button>
+
   

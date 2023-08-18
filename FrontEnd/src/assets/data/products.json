@@ -27,6 +27,7 @@
       "order_id": 1,
       "serial_no":1,
       "product_id": 15,
+      "product_name":"Jeans",
       "price":33.99,
       "quantity": 1
     },
@@ -34,6 +35,7 @@
       "order_id": 1,
       "serial_no":2,
       "product_id": 17,
+      "product_name":"Toaster",
       "price":34.99,
       "quantity": 2
     }

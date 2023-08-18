@@ -25,10 +25,15 @@ export class LoginComponent {
   OnSubmit() {
     // console.log(this.user);
     this.authService.loginUser(this.user).subscribe(
-      (response: string) => {
-        console.log(response);
-        if (response === 'User Exists') this.authService.setLogin(1);
-        alert('login sucessfully');
+      (response) => {
+        // console.log(response);
+        // if (response === 'User Exists') {
+        // this.authService.setLogin(1);
+        // alert('login sucessfully');
+        // this.router.navigate(['/product']);
+        // }
+        this.authService.setLogin(response.userId);
+        //model successfully loggede in
         this.router.navigate(['/product']);
       },
       (error: HttpErrorResponse) => {
