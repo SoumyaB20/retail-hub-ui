@@ -1,63 +1,72 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 import { Cart } from '../data-type';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
+  constructor(
+    private cartService: CartServiceService,
+    private router: Router
+  ) {}
 
-  constructor(private route:ActivatedRoute, private cartService : CartServiceService ){
-    
-  }
-  cUser:any;
   total!: any;
   cartDetails: any[] = [];
-  cart:Cart= new Cart();
-  async ngOnInit(): Promise<void>{
+  cart: Cart = new Cart();
 
-    this.route.paramMap.subscribe((params:ParamMap)=>{
-      let id=(params.get('id'));
-      this.cUser=id;
-  })
-  
-    try {
-      const data = await this.cartService.showCart();
-      console.log(data);
-      this.cartDetails = data;
-       
-      // for( let i=0;i<this.cartDetails.length;i++){
-      //   this.total = this.cart.price*this.cart.NoOfItems;
-      //   console.log(this.cartDetails.price)
-      // }
-      this.total = this.cartDetails.reduce((sum, item) => sum + item.price*item.NoOfItems, 0);
-    } 
-     catch (error) {
-      console.error('An error occurred:', error);
-  }}
+  ngOnInit(): void {
+    this.fetchCartDetails();
+  }
 
-  decreaseQuantity(id: number, NoOfItems: number){
-    console.log("sending api to backend to decrease: "+id + "number of items present:" + NoOfItems );
-    //considering it as successful  
-  }
-  increaseQuantity(id: number, NoOfItems: number){
-    console.log("sending api to backend to increase: "+id + "number of items present:" + NoOfItems );
-    //considering it as successful  
-  }
-  deleteOrder(){
-    this.cartService.deleteCartForUser(this.cUser).subscribe(
-      () => {
-        console.log('Cart deleted successfully.');
-        // Perform any additional actions after successful deletion
+  fetchCartDetails(): void {
+    this.cartService.showCart().subscribe(
+      (response: any) => {
+        // Assuming the API response contains cart items in response.cartItems
+        // this.cartDetails = response.cartItems;
+        console.log(this.cartDetails);
+        this.cartDetails = response;
+        console.log(this.cartDetails);
+        this.total = this.cartDetails.reduce(
+          (sum, item) => sum + item.price * item.NoOfItems,
+          0
+        );
       },
-      error => {
-        console.error('Error deleting cart:', error);
-        // Handle error scenarios
+      (error) => {
+        console.error('Error fetching cart details:', error);
       }
     );
   }
-}
 
+  deleteProduct(productId: number) {
+    this.cartService.deleteProductForUser(productId).subscribe(
+      () => {
+        console.log('Cart deleted successfully.');
+        this.fetchCartDetails();
+      },
+      (error) => {
+        console.error('Error deleting cart:', error);
+      }
+    );
+  }
+
+  submitOrder() {
+    alert('your order has been successfully placed');
+    this.router.navigate(['/product']);
+    this.cartService.postOrder(this.cartDetails).subscribe(
+      (response) => {
+        console.log('Order successfully submitted:', response);
+        this.router.navigate(['/product']);
+      },
+      (error) => {
+        console.error('Error submitting order:', error);
+      }
+    );
+  }
+
+  incrementValue() {}
+  decrementValue() {}
+}

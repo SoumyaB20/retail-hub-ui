@@ -56,47 +56,119 @@
    </div>
   </div> -->
 
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
-  <div class="icon" style="text-align: right"><button class="btn btn-lg" (click)="OnCart()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-  </svg></button></div>
-<div style="align-content:center">
-  <h1>Product List:</h1>
-<div class="container">
-<table class="demo table-striped" border="1" cellspacing="0" cellpadding="20" id="customers">
-  <tr>
-    <th>#</th>
-    <th>Id</th>
-    <th>Product</th>
-    <th>Stock</th>
-    <th>Price</th>
-    <th>Category</th>
-    <th>Add Item</th>
-  </tr>
-  <tr *ngFor="let data of allProducts">
-    <td ><input type="checkbox"  /></td>
-    <td>{{data.productId}}</td>
-    <td style="width:30%">{{data.productName}} 
-      <button type="button" class="btn" data-toggle="tooltip" title="{{data.productDescription}}" data-content="And here's some amazing content. It's very engaging. Right?"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-      </svg></button></td>
-    <td style="text-align:right">{{data.productStockQuantity}}</td>
-    <td style="text-align:right">${{data.productPrice}}</td>
-    <td>{{data.productCategory}}</td>
-    <td style="text-align: center;">
-      <button [disabled]="isLoading" (click)="addCart(data)">Add to cart 
-      <div *ngIf="data.isLoading" class="spinner"></div>
-    </button></td>
-  </tr>
-</table>
-</div>
-<br>
-<button class="btn1 btn btn-lg btn-primary">Prev</button>
-<button class="btn2 btn btn-lg btn-primary">Next</button>
-<br>
-<br>
-</div>  
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"
+></script>
 
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  style="width: 1000px"
+>
+  <div class="container-fluid">
+    <h1 style="font-weight: bold">Product List</h1>
+
+    <form class="navbar-nav me-auto mb-5 mb-lg-0 d-flex">
+      <input
+        class="form-control btn3"
+        id="search"
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="searchText"
+        (keyup)="search($event)"
+      />
+      <button class="btn btn-primary btn3 w3-bar" (click)="viewOrders()">
+        View Orders
+      </button>
+      <button class="btn btn-primary btn3" (click)="login()">Log Out</button>
+
+      <div class="icon" style="text-align: right">
+        <button class="btn btn-lg" (click)="OnCart()">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/009/157/893/small/shopping-cart-set-of-shopping-cart-icon-on-white-background-shopping-cart-icon-shopping-cart-design-shopping-cart-icon-sign-shopping-cart-icon-isolated-shopping-cart-symbol-free-vector.jpg"
+            alt="Cart"
+            width="68px"
+            height="76px"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<div style="align-content: center">
+  <div class="container">
+    <table
+      class="demo"
+      border="1"
+      cellspacing="0"
+      cellpadding="20"
+      id="customers"
+    >
+      <tr>
+        <!-- <th>#</th> -->
+        <th>Id</th>
+        <th>Product</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Add Item</th>
+      </tr>
+      <tr
+        *ngFor="
+          let data of allProducts
+            | search : searchText : 'productName' : 'productCategory'
+        "
+      >
+        <!-- <td ><input type="checkbox"  /></td> -->
+        <td>{{ data.productId }}</td>
+        <td style="width: 30%">
+          {{ data.productName }}
+          <button
+            type="button"
+            class="btn"
+            data-toggle="tooltip"
+            title="{{ data.productDescription }}"
+            data-content="And here's some amazing content. It's very engaging. Right?"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-info-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+              />
+              <path
+                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+              />
+            </svg>
+          </button>
+        </td>
+        <td style="text-align: right">{{ data.productStockQuantity }}</td>
+        <td style="text-align: right">${{ data.productPrice }}</td>
+        <td>{{ data.productCategory }}</td>
+        <td style="text-align: center">
+          <button [disabled]="isLoading" (click)="addCart(data)" id="addToCart">
+            Add to cart
+            <div *ngIf="data.isLoading" class="spinner"></div>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <button class="btn1 btn btn-lg btn-primary">Prev</button>
+  <button class="btn2 btn btn-lg btn-primary">Next</button>
+  <br />
+  <br />
+</div>

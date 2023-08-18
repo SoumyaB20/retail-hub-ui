@@ -1,0 +1,62 @@
+<!-- 
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+        <h2>Orders</h2>
+        <hr>
+  
+        <div *ngFor="let order of orders" class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Order ID: {{ order.order_id }}</h5>
+            <p class="card-text">User ID: {{ order.user_id }}</p>
+            <p class="card-text">Total: ${{ order.total }}</p>
+            <p class="card-text">Product ID: {{ order.product_id }}</p>
+            <p class="card-text">Order Status: {{ order.order_status }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h1 style="font-weight: bold">Orders</h1>
+      <hr />
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="customers">
+          <thead class="thead-dark">
+            <tr>
+              <th>Order ID</th>
+              <th>Total</th>
+              <th>Product ID</th>
+              <th>Order Status</th>
+              <th>View Order</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>{{ order.order_id }}</td>
+              <td style="text-align: right">${{ order.total }}</td>
+              <td>{{ order.product_id }}</td>
+              <td
+                [ngClass]="{
+                  'order-status': true,
+                  'approved-status': order.order_status === 'Approved',
+                  'draft-status': order.order_status === 'Draft',
+                  'cancelled-status': order.order_status === 'cancelled'
+                }"
+              >
+                {{ order.order_status }}
+              </td>
+              <td><button (click)="view(order.order_id)">></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-primary btn3" (click)="productPage()">Back</button>
+    </div>
+  </div>
+</div>

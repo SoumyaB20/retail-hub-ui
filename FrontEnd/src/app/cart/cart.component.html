@@ -1,33 +1,71 @@
 <div>
-    <h1>Cart Details:</h1>
+  <h1>Cart Details</h1>
   <div class="container">
-  <table class="demo table-striped" border="1" cellspacing="0" cellpadding="20" id="customers">
-    <tr>
-      <th>Id</th>
-      <th>Product</th>
-      <th>No of Items</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let data of cartDetails">
-      <td>{{data.product_id}}</td>
-      <td style="width:30%">{{data.product_name}} </td>
-      <td style="text-align:center"><button (click)="decreaseQuantity(data.product_id, data.NoOfItems)">-</button>
-        {{data.NoOfItems}}<button (click)="increaseQuantity(data.product_id, data.NoOfItems)">+</button>
+    <table
+      class="demo table-striped"
+      border="1"
+      cellspacing="0"
+      cellpadding="20"
+      id="customers"
+    >
+      <tr>
+        <th>Id</th>
+        <th>Product</th>
+        <th>No of Items</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let data of cartDetails">
+        <td>{{ data.product_id }}</td>
+        <td style="width: 30%">{{ data.product_name }}</td>
+        <td style="text-align: center">
+          <button
+            style="border-color: white; width: 20px"
+            (click)="decrementValue()"
+            value="-"
+          >
+            -
+          </button>
+          <input
+            type="text"
+            value="1"
+            maxlength="2"
+            max="10"
+            size="1"
+            id="number"
+          /><button
+            style="border-color: white; width: 20px"
+            (click)="incrementValue()"
+            value="+"
+          >
+            +
+          </button>
         </td>
-      <td style="text-align:right">${{data.price}}</td>
-    </tr>
-    <tr>
+        <td style="text-align: right">${{ data.price * data.NoOfItems }}</td>
+      </tr>
+      <tr>
         <td></td>
         <td></td>
         <td></td>
-        <td style="text-align:right">Total: ${{total}}</td>
-    </tr>
-  </table>
+        <td style="text-align: right">Total: ${{ total }}</td>
+      </tr>
+    </table>
   </div>
-  <br>
-<button (click)="deleteOrder()" class="btn1 btn btn-lg btn-primary">Delete</button>
-<button class="btn2 btn btn-lg btn-primary">Order</button>
-<br>
-  </div>
-
-  
+  <br />
+  <button
+    (click)="deleteProduct(1)"
+    class="btn1 btn btn-lg"
+    style="border-color: rgb(255, 255, 255)"
+  >
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
+      alt="Delete Item"
+      width="19"
+      height="20"
+    />
+  </button>
+  <!-- <button (click)="deleteOrder()" class="btn1 btn btn-lg btn-primary">Delete</button> -->
+  <button (click)="submitOrder()" class="btn2 btn btn-lg btn-primary">
+    Submit Order
+  </button>
+  <br />
+</div>

@@ -1,0 +1,35 @@
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  position: sticky;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: white;
+  top: 0px;
+  background-color: #133b5c;
+  text-align: center;
+  font-weight: normal;
+  font-size: 20px;
+  outline: 0.7px solid black;
+  border: 1.5px solid black;
+}

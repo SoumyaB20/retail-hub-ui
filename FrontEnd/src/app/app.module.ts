@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { OrderComponent } from './order/order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -16,15 +19,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LoginComponent,
     ProductsComponent,
     CartComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    OrderComponent,
+    OrderDetailsComponent,
+    SearchPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

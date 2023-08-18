@@ -1,42 +1,34 @@
+.products .box {
+  border: 2px solid rgb(181, 53, 18);
+  padding: 1rem 1rem;
+  background: rgba(157, 202, 180, 0.288);
+  box-shadow: var(--box-shaddow);
+  text-align: center;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+  font: size 5px;
+}
 
+* {
+  margin: 0px;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    .products .box {
-        border:2px solid rgb(181, 53, 18);
-        padding :1rem 1rem;
-        background: rgba(157, 202, 180, 0.288);
-        box-shadow:var(--box-shaddow);
-        text-align:center;
-        padding:2rem 0;
-        padding-bottom:3rem;
-        font: size 5px;
-     }
+.heading {
+  display: flex;
+  background-color: #232f3e;
+  box-shadow: 0px 1px 2px #232f3e;
+}
 
+h1 {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
 
+  background: transparent;
+  padding: 7px;
+}
 
-     * {
-        margin: 0px;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-  
-    }
-  
-  
-    .heading {
-        display: flex;
-        background-color: #232f3e;
-        box-shadow: 0px 1px 2px #232f3e;
-  
-    }
-  
-    h1 {
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-  
-        background: transparent;
-        padding: 7px;
-  
-    }
-  
 /*   
     .outer-wrapper {
         margin: 10px;
@@ -64,7 +56,7 @@
         padding-bottom: 20px;
   
     } */
-  
+
 /*   
     table {
   
@@ -103,84 +95,85 @@
         border: 1px solid rgb(177, 177, 177);
         padding-left: 20px;
     } */
-  
 
-    /* th, td {
+/* th, td {
         padding: 10px; 
         border: 1px solid gainsboro; 
       } */
-      .demo{
-          margin-top:15%;
-        border: 1px solid gainsboro; 
-      }
-      /* .demo1{
+.demo {
+  margin-top: 15%;
+  border: 1px solid gainsboro;
+}
+/* .demo1{
           margin-top:10%;
       } 
       .demo2{
           margin-left: 1000px;
          
       }*/
-      .container{
-          margin-top:-12%;
-      }
-     
+.container {
+  margin-top: -12%;
+}
 
-      #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-      
-      #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-        font-size: 18px;
-      }
-      
-      #customers tr:nth-child(even){background-color: #f2f2f2;}
-      
-      #customers tr:hover {background-color: #ddd;}
-      
-      #customers th {
-        position: sticky;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        color: white;
-        top: 0px;
-        background-color: #133b5c;
-        text-align: center;
-        font-weight: normal;
-        font-size: 20px;
-        outline: 0.7px solid black;
-        border: 1.5px solid black;
-  
-      }
-       *{
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        font-family: Tahoma, sans-serif;
-      
-      }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-      .icon{
-        padding: 25px 16px;
-        height: 40px;
-        width: 60px;
-      }
-      .btn1{
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 18px;
+}
 
-        margin-right: 70px;
-        background-color: #133b5c;
-        height: 40px;
-        width: 60px;
-        }
-        
-        .btn2{
-        
-        margin-left: 70px;
-        background-color: #133b5c;
-        height: 40px;
-        width: 60px;
-        }
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  position: sticky;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: white;
+  top: 0px;
+  background-color: #133b5c;
+  text-align: center;
+  font-weight: normal;
+  font-size: 20px;
+  outline: 0.7px solid black;
+  border: 1.5px solid black;
+}
+* {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Tahoma, sans-serif;
+}
+
+.icon {
+  padding: 25px 16px;
+  height: 40px;
+  width: 60px;
+}
+
+.btn1 {
+  margin-right: 70px;
+  height: 40px;
+  width: 60px;
+}
+
+.btn2 {
+  margin-left: -20px;
+  background-color: #133b5c;
+  /* height: 50px; */
+  padding: 10px 150px;
+  position: relative;
+  align-content: center;
+}
