@@ -15,53 +15,57 @@ export class CartComponent {
   ) {}
 
   total!: any;
-  sendTotal!:any;
-  orderId!:number;
-  cartDetails: any[] = [];
   cart: Cart = new Cart();
+  cartDetails: any[] = [];
+  totalProductPrice: number = 0; 
+  orderId: number = 0;
 
   ngOnInit(): void {
     this.fetchCartDetails();
   }
 
   fetchCartDetails(): void {
-    this.cartService.showCart().subscribe(
-      (response: any) => {
-        // Assuming the API response contains cart items in response.cartItems
-        // this.cartDetails = response.cartItems;
-        console.log(this.cartDetails);
-        this.cartDetails = response;
-        console.log(this.cartDetails);
-        for (const cartItem of this.cartDetails) {
-           this.orderId = cartItem.orderId;
-        }
-        this.sendTotal = this.cartDetails.reduce(
-          (sum, item) => sum + item.price * item.NoOfItems,
+    this.cartService.showCart().subscribe(data => {
+      this.cartDetails = data;
+      if (this.cartDetails.length > 0) {
+        this.orderId = this.cartDetails[0].orderId;
+      }
+      this.calculateTotalProductPrice();
+    });
+  }
+
+  calculateTotalProductPrice(): void{
+    this.totalProductPrice = this.cartDetails.reduce(
+      (total, order) =>
+        total +
+        order.cartLineDetailsDTOList.reduce(
+          (orderTotal: number, product: { productPrice: number; quantity: number; }) => orderTotal + product.productPrice * product.quantity,
           0
-        );
-      },
-      (error) => {
-        console.error('Error fetching cart details:', error);
-      }
+        ),
+      0
     );
   }
 
-  deleteProduct() {
-    this.cartService.deleteProductForUser(this.orderId).subscribe(
-      () => {
-        console.log('Cart deleted successfully.');
-        this.fetchCartDetails();
-      },
-      (error) => {
-        console.error('Error deleting cart:', error);
-      }
-    );
+  deleteProduct(index: number): void {
+    this.cartDetails[0].cartLineDetailsDTOList.splice(index, 1);
+    this.calculateTotalProductPrice();
+    if (this.cartDetails[0].cartLineDetailsDTOList.length == 0) {
+      this.cartService.deleteOrder(this.orderId).subscribe(
+        () => {
+          console.log('Cart deleted successfully.');
+          this.fetchCartDetails();
+        },
+        (error) => {
+          console.error('Error deleting cart:', error);
+        }
+      );
+    }
   }
 
-  submitOrder() {
+  submitOrder(): void {
     alert('your order has been successfully placed');
     this.router.navigate(['/product']);
-    this.cartService.sendOrderApproved(this.orderId, this.sendTotal).subscribe(
+    this.cartService.sendOrderApproved(this.orderId, this.cartDetails).subscribe(
       (response) => {
         console.log('Order successfully submitted:', response);
         this.router.navigate(['/product']);
@@ -72,27 +76,37 @@ export class CartComponent {
     );
   }
 
-   
+  onQuantityInput(event: any, index: number): void {
+    const inputValue = event.target.value;
+    const numericInput = inputValue.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    this.cartDetails[0].cartLineDetailsDTOList[index].quantity= numericInput; // Update the cart item quantity
+    this.calculateTotalProductPrice();
+  }
+
+  onQuantityKeydown(event: KeyboardEvent): void {
+    const allowedKeys = ['Backspace', 'Delete', 'Tab'];
+
+    if (!allowedKeys.includes(event.key) && isNaN(+event.key)) {
+      event.preventDefault();
+    }
+  }
 
   decrementValue(index: number): void {
-    if (this.cartDetails[index].NoOfItems > 1) {
-      this.cartDetails[index].NoOfItems--;
-      this.calculateTotal();
+    if (this.cartDetails[0].cartLineDetailsDTOList[index].quantity > 0) {
+      this.cartDetails[0].cartLineDetailsDTOList[index].quantity--;
+      if(this.cartDetails[0].cartLineDetailsDTOList[index].quantity===0){
+        this.cartDetails[0].cartLineDetailsDTOList.splice(index, 1);
+        this.deleteProduct(index);
+      }
+      this.calculateTotalProductPrice();
     }
   }
 
   incrementValue(index: number): void {
-    if (this.cartDetails[index].NoOfItems < 10) {
-      this.cartDetails[index].NoOfItems++;
-      this.calculateTotal();
+    if (this.cartDetails[0].cartLineDetailsDTOList[index].quantity < 10) {
+      this.cartDetails[0].cartLineDetailsDTOList[index].quantity++;
+      this.calculateTotalProductPrice();
     }
   }
 
-  calculateTotal(): number {
-    this.total = this.cartDetails.reduce(
-      (acc, item) => acc + item.price * item.NoOfItems,
-      0
-    );
-    return this.total;
-  }
 }

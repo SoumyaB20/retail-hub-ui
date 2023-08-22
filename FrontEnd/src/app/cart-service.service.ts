@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { AuthServiceService } from './auth-service.service';
-import { Cart } from './data-type';
+import { Cart, Order } from './data-type';
 
 @Injectable({
   providedIn: 'root',
@@ -13,77 +13,45 @@ export class CartServiceService {
     private http: HttpClient,
     private userService: AuthServiceService
   ) {}
-  private url = 'http://localhost:3000';
-  showCart(): Observable<any> {
-    return this.http.get(`${this.url}/cart`);
+
+   private cart: any[] = [];
+
+  setCart(userId: any[] = []) {
+    this.cart = userId;
+    console.log(this.cart);
   }
 
-  //  deleteCartForUser(userId: string, productId: number): Observable<any> {
-  //   const url = `${this.url}/cart?username=${userId}`;
-  //   return this.http.delete(url);
-  // }
+  getCart() {
+    return this.cart;
+  }
 
-  // private url="http://localhost:9091/order-management-service/order";
+  private url="http://localhost:9091/order-management-service/order";
 
-  // showCart(): Observable<any> {
-  //   const userId = this.userService.getUserId;
-  //   return this.http.get(`${this.url}/cart-details?userId=${userId}`);
-  // }
+  showCart(): Observable<any> {
+    const userId = this.userService.userId;
+    return this.http.get(`${this.url}/cart-details?userId=5`);
+  }
 
-  deleteProductForUser(orderId: any): Observable<any> {
-    const userId = this.userService.getUserId;
-    const url = `${this.url}/delete-order?userId=${userId}?orderId=${orderId}`;
+  deleteOrder(orderId: any): Observable<any> {
+    const userId = this.userService.userId;
+    const url = `${this.url}/delete-order/${orderId}`;
     return this.http.delete(url);
   }
 
-  addCart(c: Cart): Observable<object> {
+  addCart(c: Order): Observable<object> {
     console.log(c);
-    return this.http.post(`${this.url}/cart`, c);
+    return this.http.post(`${this.url}/add-to-cart`, c);
   }
 
-  sendOrderApproved(orderId: any, total: any): Observable<any> {
+  sendOrderApproved(orderId:any, cartDetails:any): Observable<any> {
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     // return this.http.post(`${this.url}/api/orders`, orderData, { headers });
-    return this.http.post(`${this.url}/api/orders`, total);
-  }
-  updateOrderStatus(orderId: number): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    // Send a PUT request to update the order status to "success"
-    return this.http.put(
-      `${this.url}/api/orders/${orderId}`,
-      { status: 'approved' },
-      { headers }
-    );
-  }
-
-  saveOrderAndDetails(orderData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    // Step 1: Save the order with draft status
-    const orderRequest = this.http.post(
-      `${this.url}/api/orders`,
-      { ...orderData, status: 'draft' },
-      { headers }
-    );
-
-    // Step 2: Save the order details
-    const orderDetailsRequest = this.http.post(
-      `${this.url}/api/order-details`,
-      { headers }
-    );
-
-    // Combine both requests and return as a single Observable
-    return forkJoin([orderRequest, orderDetailsRequest]);
+    return this.http.get(`${this.url}/api/orders`);
   }
 
   getOrders(): Observable<any[]> {
-    const userId = this.userService.getUserId;
-    return this.http.get<any[]>(`${this.url}/orders`);
+    const userId = this.userService.userId;
+    return this.http.get<any[]>(`${this.url}/details?userId=5`);
   }
 
-  getOrderDetails(orderId: number): Observable<any[]> {
-    // return this.http.get<any[]>(`${this.url}/order_deatils/${orderId}`);
-    return this.http.get<any[]>(`${this.url}/order_deatils`);
-  }
 }

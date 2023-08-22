@@ -19,3 +19,23 @@ export class Cart {
   price!: number;
   NoOfItems!: number;
 }
+
+export class OrderHeader {
+  orderId!: number;
+  userId!: number;
+  totalOrderValue!: number;
+  orderStatus!: string;
+}
+
+export class OrderDetail {
+  orderId!: number;
+  productId!: number;
+  productName!: string;
+  productPrice!: number;
+  quantity!: number;
+}
+
+export class Order {
+  orderHeader!: OrderHeader;
+  orderDetailsList!: OrderDetail[];
+}

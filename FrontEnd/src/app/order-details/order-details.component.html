@@ -17,20 +17,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let detail of orderDetails">
-                <td style="text-align: right;">{{ detail.serial_no }}</td>
-                <td style="text-align: right;">{{ detail.product_id }}</td>
-                <td>{{ detail.product_name }}</td>
-                <td style="text-align: right;">{{ detail.quantity }}</td>
-                <td style="text-align: right;">${{detail.price}}</td>
+              <tr *ngFor="let product of orderDetails[0].cartLineDetailsDTOList">
+                <td style="text-align: center;">1</td>
+                <td style="text-align: right;">{{ product.productId }}</td>
+                <td>{{ product.productName }}</td>
+                <td style="text-align: right;">{{ product.quantity }}</td>
+                <td style="text-align: right;">${{product.productPrice}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td style="text-align: right">Total: ${{total}}</td>
-              </tr>
+              </tr> -->
             </tbody>
             
           </table>
@@ -39,5 +39,11 @@
     </div>
   </div>
   <button class="btn btn-primary btn3" (click)="OrdersPage()">Back</button>
+
+  
+
+
+
+
 
   

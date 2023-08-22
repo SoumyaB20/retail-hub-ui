@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 
 @Component({
@@ -9,10 +9,13 @@ import { CartServiceService } from '../cart-service.service';
 })
 export class OrderComponent {
   orders: any[] = [];
+  orderId: any;
+
   constructor(
     private cartService: CartServiceService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     this.fetchOrders();
   }
@@ -22,6 +25,10 @@ export class OrderComponent {
       (orders) => {
         this.orders = orders;
         console.log('Fetched orders:', this.orders);
+        this.cartService.setCart(this.orders);
+        if (this.orders.length > 0) {
+          this.orderId = this.orders[0].orderId;
+        }
       },
       (error) => {
         console.error('Error fetching orders:', error);
@@ -29,8 +36,8 @@ export class OrderComponent {
     );
   }
 
-  view(order_id: any, total:any) {
-    this.router.navigate(['/orderDetails', order_id, total]);
+  viewOrder() {
+    this.router.navigate(['/orderDetails', this.orderId]);
   }
   productPage() {
     this.router.navigate(['/product']);

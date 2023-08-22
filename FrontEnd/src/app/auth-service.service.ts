@@ -15,7 +15,7 @@ export class AuthServiceService {
     'http://localhost:9090/product-management-service/user/authentication';
 
   private loggedIn = false;
-  private userId: number | any;
+   userId: number | any;
 
   constructor(private http: HttpClient) {}
 
@@ -28,9 +28,9 @@ export class AuthServiceService {
     this.loggedIn = true;
   }
 
-  getUserId() {
-    return this.userId;
-  }
+  // getUserId() {
+  //   return this.userId;
+  // }
 
   isLoggedIn(): boolean {
     return this.loggedIn;

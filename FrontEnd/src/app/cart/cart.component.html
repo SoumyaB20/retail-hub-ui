@@ -13,10 +13,11 @@
         <th>Product</th>
         <th>No of Items</th>
         <th>Price</th>
+        <th>Delete</th>
       </tr>
-      <tr *ngFor="let data of cartDetails ; let i = index">
-        <td>{{ data.product_id }}</td>
-        <td style="width: 30%">{{ data.product_name }}</td>
+      <tr *ngFor="let data of cartDetails[0]?.cartLineDetailsDTOList ; let i = index">
+        <td>{{ data.productId }}</td>
+        <td style="width: 30%">{{ data.productName }}</td>
         <td style="text-align: center">
           <button
             style="border-color: white; width: 20px"
@@ -26,12 +27,13 @@
             -
           </button>
           <input
-            type="text"
-            [value]="data.NoOfItems"
-            maxlength="2"
+            [value]="data.quantity"
+            maxlength="3"
             max="10"
             size="1"
             id="number"
+            (input)="onQuantityInput($event, i)"
+            (keydown)="onQuantityKeydown($event)"
           /><button
             style="border-color: white; width: 20px"
             (click)="incrementValue(i)"
@@ -40,29 +42,29 @@
             +
           </button>
         </td>
-        <td style="text-align: right">${{ data.price * data.NoOfItems | number:'1.2-2'  }}</td>
+        <td style="text-align: right">${{ data.productPrice * data.quantity | number:'1.2-2'  }}</td>
+        <td style="text-align: center;" > <button
+          (click)="deleteProduct(i)"
+          class="btn3 btn btn-lg"
+          style="border-color: rgb(255, 255, 255)"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
+            alt="Delete Item"
+            width="19"
+            height="20"
+          />
+        </button></td>
       </tr>
       <tr>
         <td></td>
         <td></td>
         <td></td>
-        <td style="text-align: right">Total: ${{ calculateTotal() | number:'1.2-2'  }}</td>
+        <td style="text-align: right">Total: ${{totalProductPrice | number:'1.2-2'  }}</td>
       </tr>
     </table>
   </div>
   <br />
-  <button
-    (click)="deleteProduct()"
-    class="btn1 btn btn-lg"
-    style="border-color: rgb(255, 255, 255)"
-  >
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
-      alt="Delete Item"
-      width="19"
-      height="20"
-    />
-  </button>
   <!-- <button (click)="deleteOrder()" class="btn1 btn btn-lg btn-primary">Delete</button> -->
   <button (click)="submitOrder()" class="btn2 btn btn-lg btn-primary">
     Submit Order

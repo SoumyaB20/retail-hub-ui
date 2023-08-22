@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
-import { Product } from '../data-type';
+import { Order, Product } from '../data-type';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ProductService } from '../product.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
+
 export class ProductsComponent {
   product: Product = new Product();
   // list!:any;
@@ -75,30 +76,39 @@ export class ProductsComponent {
   // }
   isLoading: boolean = false;
 
+  
   addCart(n: any) {
-    // Assuming you gather order details in your form
-    const orderDetailsData = n; // Replace with your data structure
-    n.isLoading = true;
-    this.cartService.saveOrderAndDetails(orderDetailsData).subscribe(
-      (responses) => {
-        // Simulate an API call (replace with your actual API call)
-
-        console.log('Order and details successfully saved:', responses);
-        // Perform any further actions on successful save
+    const order: Order = {
+      orderHeader: {
+        orderId: 0,
+        userId: 2,
+        totalOrderValue: 150,
+        orderStatus: "DRAFT"
       },
-      (error) => {
-        console.error('Error saving order and details:', error);
-        // Handle error cases
-      }
-    );
+      orderDetailsList: [
+        {
+          orderId: 0,
+          productId: 11,
+          productName: "Product A",
+          productPrice: 50,
+          quantity: 2
+        }
+      ]
+    };
+    
+    n.isLoading = true;
     setTimeout(() => {
-      // After the API call is done, hide the spinner
+      this.cartService.addCart(order).subscribe(
+        (responses) => {
+          console.log('Order and details successfully saved:', responses);
+        },
+        (error) => {
+          console.error('Error saving order and details:', error);
+        }
+      );
       n.isLoading = false;
-      alert('item added to cart');
-    }, 1000); // Simulating a 2-second API call
+    }, 1000); 
   }
-
-  //fetch userid and retrive it till the end
 
   search(event: any) {
     this.searchText = event.target.value;

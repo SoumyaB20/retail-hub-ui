@@ -37,19 +37,19 @@
           </thead>
           <tbody>
             <tr *ngFor="let order of orders">
-              <td>{{ order.order_id }}</td>
-              <td style="text-align: right">${{ order.total }}</td>
+              <td>{{ order.orderId }}</td>
+              <td style="text-align: right">${{ order.totalOrderValue }}</td>
               <td
                 [ngClass]="{
                   'order-status': true,
-                  'approved-status': order.order_status === 'Approved',
-                  'draft-status': order.order_status === 'Draft',
-                  'cancelled-status': order.order_status === 'cancelled'
+                  'approved-status': order.orderStatus === 'APPROVED',
+                  'draft-status': order.orderStatus === 'DRAFT',
+                  'cancelled-status': order.orderStatus === 'CANCELLED'
                 }"
               >
-                {{ order.order_status }}
+                {{ order.orderStatus }}
               </td>
-              <td><button (click)="view(order.order_id, order.total)">></button></td>
+              <td><button (click)="viewOrder()">></button></td>
             </tr>
           </tbody>
         </table>
