@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
-import { Cart } from '../data-type';
+import { Cart, cartData } from '../data-type';
 
 @Component({
   selector: 'app-cart',
@@ -27,6 +27,7 @@ export class CartComponent {
   fetchCartDetails(): void {
     this.cartService.showCart().subscribe(data => {
       this.cartDetails = data;
+      // console.log(data);
       if (this.cartDetails.length > 0) {
         this.orderId = this.cartDetails[0].orderId;
       }
@@ -46,11 +47,11 @@ export class CartComponent {
     );
   }
 
-  deleteProduct(index: number): void {
+  deleteProduct(index: number, productId: number): void {
     this.cartDetails[0].cartLineDetailsDTOList.splice(index, 1);
     this.calculateTotalProductPrice();
-    if (this.cartDetails[0].cartLineDetailsDTOList.length == 0) {
-      this.cartService.deleteOrder(this.orderId).subscribe(
+    // if (this.cartDetails[0].cartLineDetailsDTOList.length == 0) {
+      this.cartService.deleteOrder(this.orderId, productId).subscribe(
         () => {
           console.log('Cart deleted successfully.');
           this.fetchCartDetails();
@@ -59,21 +60,20 @@ export class CartComponent {
           console.error('Error deleting cart:', error);
         }
       );
-    }
+    // }
   }
 
   submitOrder(): void {
-    alert('your order has been successfully placed');
-    this.router.navigate(['/product']);
-    this.cartService.sendOrderApproved(this.orderId, this.cartDetails).subscribe(
-      (response) => {
-        console.log('Order successfully submitted:', response);
-        this.router.navigate(['/product']);
-      },
-      (error) => {
-        console.error('Error submitting order:', error);
-      }
-    );
+      this.cartService.sendOrderApproved(this.cartDetails).subscribe(
+        (responses) => {
+          alert('your order has been successfully placed');
+          console.log('Order and details successfully saved:', responses);
+          this.router.navigate(['/product']);
+        },
+        (error) => {
+          console.error('Error saving order and details:', error);
+        }
+      );
   }
 
   onQuantityInput(event: any, index: number): void {
@@ -91,12 +91,12 @@ export class CartComponent {
     }
   }
 
-  decrementValue(index: number): void {
+  decrementValue(index: number, productId:number): void {
     if (this.cartDetails[0].cartLineDetailsDTOList[index].quantity > 0) {
       this.cartDetails[0].cartLineDetailsDTOList[index].quantity--;
       if(this.cartDetails[0].cartLineDetailsDTOList[index].quantity===0){
         this.cartDetails[0].cartLineDetailsDTOList.splice(index, 1);
-        this.deleteProduct(index);
+        this.deleteProduct(index, productId);
       }
       this.calculateTotalProductPrice();
     }

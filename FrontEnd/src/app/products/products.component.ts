@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 import { CartServiceService } from '../cart-service.service';
-import { Order, Product } from '../data-type';
+import { cartData, Product } from '../data-type';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductsComponent {
   constructor(
     private prodService: ProductService,
     private cartService: CartServiceService,
-    private route: ActivatedRoute,
+    private authService: AuthServiceService,
     private router: Router
   ) {}
 
@@ -76,25 +77,82 @@ export class ProductsComponent {
   // }
   isLoading: boolean = false;
 
+  orderId: number = 0;  
   
-  addCart(n: any) {
-    const order: Order = {
-      orderHeader: {
-        orderId: 0,
+  async addCart(n: any) {
+    n.isLoading = true;
+    try {
+      const data = await this.cartService.showCart().toPromise();
+      // console.log(data);
+      
+      if (data.length > 0) {
+        this.orderId = data[0].orderId;
+      }
+      // console.log("just saving oID:", this.orderId);
+      
+      const order: cartData = {
+        orderId: this.orderId,
         userId: 2,
-        totalOrderValue: 150,
-        orderStatus: "DRAFT"
-      },
-      orderDetailsList: [
+        totalOrderValue: 0,
+        orderStatus: "DRAFT",
+        cartLineDetailsDTOList: [
+          {
+            productId: n.productId,
+            productName: n.productName,
+            productPrice: n.productPrice,
+            quantity: 1
+          }
+        ]
+      };
+      
+      // console.log("after set:", order);
+      
+    setTimeout(() => {
+      this.cartService.addCart(order).subscribe(
+        (responses) => {
+          console.log('Order and details successfully saved:', responses);
+        },
+        (error) => {
+          console.error('Error saving order and details:', error);
+        }
+      );
+      n.isLoading = false;
+    }, 1000); 
+      
+      // Now you can continue with the rest of your logic using the 'order' object
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error appropriately
+    }
+  }
+  
+  add3Cart(n: any) {
+    
+    this.cartService.showCart().subscribe(data => {
+      // this.cartDetails = data;
+      console.log(data);
+      if (data.length > 0) {
+        this.orderId = data[0].orderId;
+      }
+      console.log("just saving oID:",this.orderId);
+    });
+  
+
+    const order: cartData = {
+        orderId: this.orderId,
+        userId: 2,
+        totalOrderValue: 0,
+        orderStatus: "DRAFT",
+        cartLineDetailsDTOList: [
         {
-          orderId: 0,
-          productId: 11,
-          productName: "Product A",
-          productPrice: 50,
-          quantity: 2
+          productId: n.productId,
+          productName: n.productName,
+          productPrice: n.productPrice,
+          quantity: 1
         }
       ]
     };
+    console.log("after set:",order);
     
     n.isLoading = true;
     setTimeout(() => {
@@ -112,6 +170,6 @@ export class ProductsComponent {
 
   search(event: any) {
     this.searchText = event.target.value;
-    console.log(this.searchText);
+    // console.log(this.searchText);
   }
 }

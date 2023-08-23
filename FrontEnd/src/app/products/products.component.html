@@ -81,6 +81,7 @@
         type="text"
         placeholder="Search"
         [(ngModel)]="searchText"
+        [ngModelOptions]="{ standalone: true }"
         (keyup)="search($event)"
       />
       <button class="btn btn-primary btn3 w3-bar" (click)="viewOrders()">

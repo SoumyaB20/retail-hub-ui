@@ -20,15 +20,15 @@ export class Cart {
   NoOfItems!: number;
 }
 
-export class OrderHeader {
+export class cartData {
   orderId!: number;
   userId!: number;
   totalOrderValue!: number;
   orderStatus!: string;
+  cartLineDetailsDTOList!: cartLineDetailsDTOList[];
 }
 
-export class OrderDetail {
-  orderId!: number;
+export class cartLineDetailsDTOList {
   productId!: number;
   productName!: string;
   productPrice!: number;
@@ -36,6 +36,6 @@ export class OrderDetail {
 }
 
 export class Order {
-  orderHeader!: OrderHeader;
-  orderDetailsList!: OrderDetail[];
+  cartData!: cartData;
+  cartLineDetailsDTOList!: cartLineDetailsDTOList[];
 }

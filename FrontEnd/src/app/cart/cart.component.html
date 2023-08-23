@@ -15,13 +15,14 @@
         <th>Price</th>
         <th>Delete</th>
       </tr>
-      <tr *ngFor="let data of cartDetails[0]?.cartLineDetailsDTOList ; let i = index">
+      <ng-container *ngFor="let data of cartDetails[0]?.cartLineDetailsDTOList ; let i = index">
+        <tr *ngIf="data.quantity > 0">
         <td>{{ data.productId }}</td>
         <td style="width: 30%">{{ data.productName }}</td>
         <td style="text-align: center">
           <button
             style="border-color: white; width: 20px"
-            (click)="decrementValue(i)"
+            (click)="decrementValue(i, data.productId)"
             value="-"
           >
             -
@@ -44,7 +45,7 @@
         </td>
         <td style="text-align: right">${{ data.productPrice * data.quantity | number:'1.2-2'  }}</td>
         <td style="text-align: center;" > <button
-          (click)="deleteProduct(i)"
+          (click)="deleteProduct(i, data.productId)"
           class="btn3 btn btn-lg"
           style="border-color: rgb(255, 255, 255)"
         >
@@ -55,7 +56,8 @@
             height="20"
           />
         </button></td>
-      </tr>
+        </tr>
+      </ng-container>
       <tr>
         <td></td>
         <td></td>

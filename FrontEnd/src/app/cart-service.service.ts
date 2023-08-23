@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthServiceService } from './auth-service.service';
-import { Cart, Order } from './data-type';
+import { Cart, cartData } from './data-type';
 
 @Injectable({
   providedIn: 'root',
@@ -29,29 +29,31 @@ export class CartServiceService {
 
   showCart(): Observable<any> {
     const userId = this.userService.userId;
-    return this.http.get(`${this.url}/cart-details?userId=5`);
+    return this.http.get(`${this.url}/cart-details?userId=2`);
   }
 
-  deleteOrder(orderId: any): Observable<any> {
+  deleteOrder(orderId: number, productId: number): Observable<any> {
     const userId = this.userService.userId;
-    const url = `${this.url}/delete-order/${orderId}`;
+    const url = `${this.url}/delete-order/${orderId}?productId=${productId}`;
     return this.http.delete(url);
   }
 
-  addCart(c: Order): Observable<object> {
-    console.log(c);
+  addCart(c: cartData): Observable<object> {
+    // console.log(`${this.url}/add-to-cart`, c);
     return this.http.post(`${this.url}/add-to-cart`, c);
   }
 
-  sendOrderApproved(orderId:any, cartDetails:any): Observable<any> {
+  sendOrderApproved(cartDetails: any[]): Observable<any> {
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     // return this.http.post(`${this.url}/api/orders`, orderData, { headers });
-    return this.http.get(`${this.url}/api/orders`);
+    console.log(cartDetails);
+    
+    return this.http.post(`${this.url}/submit-order`, cartDetails);
   }
 
   getOrders(): Observable<any[]> {
     const userId = this.userService.userId;
-    return this.http.get<any[]>(`${this.url}/details?userId=5`);
+    return this.http.get<any[]>(`${this.url}/details?userId=2`);
   }
 
 }
