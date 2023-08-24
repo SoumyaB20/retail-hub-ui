@@ -109,5 +109,9 @@ export class CartComponent {
       this.calculateTotalProductPrice();
     }
   }
+  productPage() {
+    this.router.navigate(['/product']);
+  }
+
 
 }

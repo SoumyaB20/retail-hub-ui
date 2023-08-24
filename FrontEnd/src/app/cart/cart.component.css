@@ -177,6 +177,15 @@ h1 {
   position: relative;
   align-content: center;
 }
+.btn3 {
+  padding: 8px 10px;
+  margin-right: 90px;
+  background-color: #133b5c;
+  height: 40px;
+  font-size: large;
+  position: relative;
+  text-align: center;
+}
 * {
   font-family: Tahoma, sans-serif;
 }

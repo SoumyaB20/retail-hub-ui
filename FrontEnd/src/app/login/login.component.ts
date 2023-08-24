@@ -11,6 +11,8 @@ import { User } from '../data-type';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+
+  protected flag = false;
   user:User= new User();
 
   constructor(
@@ -26,7 +28,10 @@ export class LoginComponent {
         this.router.navigate(['/product']);
       },
       (error: HttpErrorResponse) => {
-        alert('Invalid username or password');
+        this.flag = true;
+        setTimeout(() => {
+          this.flag = false;
+        }, 3000);
         console.error('HTTP error:', error);
       }
     );

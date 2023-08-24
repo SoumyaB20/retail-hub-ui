@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { OrderComponent } from './order/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SearchPipe } from './search.pipe';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SearchPipe } from './search.pipe';
     OrderComponent,
     OrderDetailsComponent,
     SearchPipe,
+    AlertComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
