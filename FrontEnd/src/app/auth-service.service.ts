@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
 import { User } from './data-type';
 
 @Injectable({
@@ -12,36 +12,28 @@ import { User } from './data-type';
 })
 export class AuthServiceService {
   private url =
-    'http://localhost:9090/product-management-service/user/authentication';
+    'http://localhost:8090/retail-hub/api/user/authentication';
 
-  private loggedIn = false;
-   userId: number | any;
-
-  constructor(private http: HttpClient) {}
-
-  logout(): void {
-    this.loggedIn = false;
-  }
-
-  setLogin(userId: number) {
-    this.userId = userId;
-    this.loggedIn = true;
-  }
-
-  // getUserId() {
-  //   return this.userId;
-  // }
-
-  isLoggedIn(): boolean {
-    return this.loggedIn;
-  }
+   constructor(private http: HttpClient) {}
+ 
+ 
+   private userSubject = new BehaviorSubject<any>(null);
+   user$: Observable<any> = this.userSubject.asObservable();
+   
+     logout(): void {
+       this.userSubject.next(null);
+       localStorage.removeItem('user');
+     }
+   
+     setLogin(userId: number) {
+       this.userSubject.next(userId);
+       localStorage.setItem('user', JSON.stringify(userId));
+     }
 
   loginUser(user: User): Observable<any> {
     console.log(user);
     return this.http.get(
       `${this.url}/${user.username}?password=${user.password}`
-      // ,
-      // { responseType: 'text' }
     );
   }
 }

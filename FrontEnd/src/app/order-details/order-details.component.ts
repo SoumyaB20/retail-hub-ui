@@ -10,7 +10,8 @@ import { CartServiceService } from '../cart-service.service';
 export class OrderDetailsComponent {
   orderDetails: any[] = [];
   orderId!: any;
-  total!:any;
+  index!: any;
+  total!: any;
   constructor(
     private orderService: CartServiceService,
     private router: Router,
@@ -20,12 +21,14 @@ export class OrderDetailsComponent {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       let OrderId = params.get('OrderId');
+      let index = params.get('index');
+      this.index = index;
       this.orderId = OrderId;
     });
     this.orderDetails = this.orderService.getCart();
   }
 
-    OrdersPage() {
+  OrdersPage() {
     this.router.navigate(['/orders']);
   }
 }

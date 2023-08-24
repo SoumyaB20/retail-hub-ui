@@ -12,14 +12,6 @@ export class Product {
   stock_quantity!: number;
 }
 
-export class Cart {
-  product_id!: number;
-  username!: String;
-  product_name!: string;
-  price!: number;
-  NoOfItems!: number;
-}
-
 export class cartData {
   orderId!: number;
   userId!: number;

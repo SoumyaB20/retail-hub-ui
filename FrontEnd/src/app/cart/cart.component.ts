@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
-import { Cart, cartData } from '../data-type';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +14,6 @@ export class CartComponent {
   ) {}
 
   total!: any;
-  cart: Cart = new Cart();
   cartDetails: any[] = [];
   totalProductPrice: number = 0; 
   orderId: number = 0;
@@ -64,7 +62,9 @@ export class CartComponent {
   }
 
   submitOrder(): void {
-      this.cartService.sendOrderApproved(this.cartDetails).subscribe(
+    for (const order of this.cartDetails) {
+      order.totalOrderValue=this.totalProductPrice;
+      this.cartService.sendOrderApproved(order).subscribe(
         (responses) => {
           alert('your order has been successfully placed');
           console.log('Order and details successfully saved:', responses);
@@ -74,6 +74,7 @@ export class CartComponent {
           console.error('Error saving order and details:', error);
         }
       );
+    }
   }
 
   onQuantityInput(event: any, index: number): void {

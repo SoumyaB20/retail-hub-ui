@@ -29,6 +29,7 @@
         <table class="table table-bordered table-hover" id="customers">
           <thead class="thead-dark">
             <tr>
+              <th>Serial no.</th>
               <th>Order ID</th>
               <th>Total</th>
               <th>Order Status</th>
@@ -36,8 +37,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let order of orders">
-              <td>{{ order.orderId }}</td>
+            <tr *ngFor="let order of orders; let i = index">
+              <td style="text-align: right">{{i+1}}</td>
+              <td style="text-align: right">{{ order.orderId }}</td>
               <td style="text-align: right">${{ order.totalOrderValue }}</td>
               <td
                 [ngClass]="{
@@ -49,7 +51,7 @@
               >
                 {{ order.orderStatus }}
               </td>
-              <td><button (click)="viewOrder()">></button></td>
+              <td><button (click)="viewOrder(order.orderId,i)">></button></td>
             </tr>
           </tbody>
         </table>

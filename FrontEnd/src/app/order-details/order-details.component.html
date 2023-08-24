@@ -17,8 +17,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of orderDetails[0].cartLineDetailsDTOList">
-                <td style="text-align: center;">1</td>
+              <tr *ngFor="let product of orderDetails[index].cartLineDetailsDTOList; let i= index">
+                <td style="text-align: center;">{{i+1}}</td>
                 <td style="text-align: right;">{{ product.productId }}</td>
                 <td>{{ product.productName }}</td>
                 <td style="text-align: right;">{{ product.quantity }}</td>
