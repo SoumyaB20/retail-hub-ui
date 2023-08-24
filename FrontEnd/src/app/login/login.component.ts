@@ -14,6 +14,7 @@ export class LoginComponent {
 
   protected flag = false;
   user:User= new User();
+  successMessage: string = '';
 
   constructor(
     private authService: AuthServiceService,
@@ -25,7 +26,14 @@ export class LoginComponent {
     this.authService.loginUser(this.user).subscribe(
       (response) => {
         this.authService.setLogin(response.userId);
-        this.router.navigate(['/product']);
+        this.successMessage = 'Login successful!';
+        this.flag = false; 
+        setTimeout(() => {
+          this.successMessage = '';
+          this.router.navigate(['/product']);
+        }, 1000); 
+
+        // this.router.navigate(['/product']);
       },
       (error: HttpErrorResponse) => {
         this.flag = true;

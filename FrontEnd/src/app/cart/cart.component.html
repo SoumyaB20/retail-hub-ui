@@ -68,9 +68,13 @@
   </div>
   <br />
   <!-- <button (click)="deleteOrder()" class="btn1 btn btn-lg btn-primary">Delete</button> -->
-  <button class="btn btn-primary btn3" (click)="productPage()">Back</button>
+  <button class="btn btn-primary btn4" (click)="productPage()">Back</button>
   <button (click)="submitOrder()" class="btn2 btn btn-lg btn-primary">
     Submit Order
   </button>
   <br />
+  <!-- <app-alert *ngIf="flag" msg="your order has been successfully placed"></app-alert> -->
+  <app-alert *ngIf="successMessage" [msg]="successMessage"></app-alert>
+
 </div>
+

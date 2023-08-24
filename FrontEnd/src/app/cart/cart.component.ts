@@ -8,6 +8,9 @@ import { CartServiceService } from '../cart-service.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
+  protected flag = false;
+  successMessage: string = '';
+
   constructor(
     private cartService: CartServiceService,
     private router: Router
@@ -17,6 +20,7 @@ export class CartComponent {
   cartDetails: any[] = [];
   totalProductPrice: number = 0; 
   orderId: number = 0;
+
 
   ngOnInit(): void {
     this.fetchCartDetails();
@@ -62,20 +66,50 @@ export class CartComponent {
   }
 
   submitOrder(): void {
+    const successfulOrders = [];
     for (const order of this.cartDetails) {
       order.totalOrderValue=this.totalProductPrice;
       this.cartService.sendOrderApproved(order).subscribe(
-        (responses) => {
-          alert('your order has been successfully placed');
-          console.log('Order and details successfully saved:', responses);
-          this.router.navigate(['/product']);
-        },
-        (error) => {
-          console.error('Error saving order and details:', error);
+        (response) => {
+          //  alert('your order has been successfully placed');
+        
+
+            // this.flag = true;
+            // setTimeout(() => {
+            //   this.flag = false;
+            // }, 5000);
+        
+          // console.log('Order and details successfully saved:', responses);
+          // this.router.navigate(['/product']);
+  //       },
+  //       (error) => {
+  //         console.error('Error saving order and details:', error);
+  //       }
+  //     );
+  //   }
+  // }
+
+
+  successfulOrders.push(response);
+        if (successfulOrders.length === this.cartDetails.length) {
+          this.showAlertAndNavigate();
         }
-      );
-    }
+      },
+      (error) => {
+        console.error('Error saving order and details:', error);
+      }
+    );
   }
+}
+
+showAlertAndNavigate(): void {
+  this.successMessage = 'Your order has been successfully placed';
+
+  setTimeout(() => {
+    this.successMessage = '';
+    this.router.navigate(['/product']);
+  }, 2000); 
+}
 
   onQuantityInput(event: any, index: number): void {
     const inputValue = event.target.value;
