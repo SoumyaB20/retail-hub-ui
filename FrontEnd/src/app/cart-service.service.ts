@@ -8,6 +8,7 @@ import { cartData } from './data-type';
   providedIn: 'root',
 })
 export class CartServiceService {
+  private taxApplied: boolean = false;
   userId: any;
   constructor(
     private http: HttpClient,
@@ -24,6 +25,14 @@ export class CartServiceService {
     this.cart = userId;
     console.log(this.cart);
   }
+  setTaxApplied(flag: boolean): void {
+    this.taxApplied = flag;
+  }
+
+  getTaxApplied(): boolean {
+    return this.taxApplied;
+  }
+
 
   getCart() {
     return this.cart;

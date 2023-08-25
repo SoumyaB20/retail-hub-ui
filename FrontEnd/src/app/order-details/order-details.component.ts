@@ -12,7 +12,10 @@ export class OrderDetailsComponent {
   orderId!: any;
   index!: any;
   total!: any;
+  taxApplied: boolean = false;
+
   constructor(
+    private cartService: CartServiceService,
     private orderService: CartServiceService,
     private router: Router,
     private route: ActivatedRoute
@@ -25,6 +28,8 @@ export class OrderDetailsComponent {
       this.index = index;
       this.orderId = OrderId;
     });
+    
+    this.taxApplied = this.cartService.getTaxApplied();
     this.orderDetails = this.orderService.getCart();
   }
 

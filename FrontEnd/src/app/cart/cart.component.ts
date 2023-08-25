@@ -10,6 +10,9 @@ import { CartServiceService } from '../cart-service.service';
 export class CartComponent {
   protected flag = false;
   successMessage: string = '';
+  showTaxDialog: boolean = false;
+  taxApplied: boolean = false;
+  
 
   constructor(
     private cartService: CartServiceService,
@@ -26,6 +29,14 @@ export class CartComponent {
     this.fetchCartDetails();
   }
 
+  openTaxDialog(): void {
+    this.showTaxDialog = true;
+  }
+  
+  closeTaxDialog(): void {
+    this.showTaxDialog = false;
+  }
+  
   fetchCartDetails(): void {
     this.cartService.showCart().subscribe(data => {
       this.cartDetails = data;
@@ -66,6 +77,23 @@ export class CartComponent {
   }
 
   submitOrder(): void {
+    if (this.totalProductPrice > 500) {
+      this.openTaxDialog();
+    } else {
+      this.finalizeOrder();
+    }
+  }
+  
+  applyTaxAndSubmit(): void {
+    this.totalProductPrice += 10; // Add tax
+    this.closeTaxDialog();
+    this.cartService.setTaxApplied(true); 
+    this.finalizeOrder();
+    
+  }
+
+  finalizeOrder(): void {
+
     const successfulOrders = [];
     for (const order of this.cartDetails) {
       order.totalOrderValue=this.totalProductPrice;
@@ -88,8 +116,6 @@ export class CartComponent {
   //     );
   //   }
   // }
-
-
   successfulOrders.push(response);
         if (successfulOrders.length === this.cartDetails.length) {
           this.showAlertAndNavigate();
