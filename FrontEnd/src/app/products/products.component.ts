@@ -75,12 +75,12 @@ export class ProductsComponent {
           },
         ],
       };
-      this.toastr.success(`You have added ${n.productName} to the cart`, 'Success');
-
+     
       setTimeout(() => {
         this.cartService.addCart(order).subscribe(
           (responses) => {
             console.log('Order and details successfully saved:', responses);
+            this.toastr.success(`You have added ${n.productName} to the cart`, 'Success');
           },
           (error) => {
             console.error('Error saving order and details:', error);

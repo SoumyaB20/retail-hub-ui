@@ -222,7 +222,7 @@ h1 {
   background-color: white;
 }
 
-.toast-top-right {
+/* .toast-top-right {
   top: 10px;
   right: 10px;
   z-index: 9999;
@@ -234,10 +234,10 @@ h1 {
   z-index: 9999;
 }
 
-.toastr-success {
+.toastr-show {
   background-color: #133b5c;
 }
 
 .toast-message {
   color: white;
-}
+} */
