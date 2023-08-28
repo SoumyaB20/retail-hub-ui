@@ -1,10 +1,8 @@
 import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
+  HttpClient
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 import { User } from './data-type';
 
 @Injectable({
@@ -16,18 +14,17 @@ export class AuthServiceService {
 
    constructor(private http: HttpClient) {}
  
- 
    private userSubject = new BehaviorSubject<any>(null);
    user$: Observable<any> = this.userSubject.asObservable();
    
      logout(): void {
        this.userSubject.next(null);
-       localStorage.removeItem('user');
+       localStorage.removeItem('userId');
      }
    
      setLogin(userId: number) {
        this.userSubject.next(userId);
-       localStorage.setItem('user', JSON.stringify(userId));
+       localStorage.setItem('userId', JSON.stringify(userId));
      }
 
   loginUser(user: User): Observable<any> {

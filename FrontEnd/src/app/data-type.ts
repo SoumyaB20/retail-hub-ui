@@ -14,7 +14,7 @@ export class Product {
 
 export class cartData {
   orderId!: number;
-  userId!: number;
+  userId!: any;
   totalOrderValue!: number;
   orderStatus!: string;
   cartLineDetailsDTOList!: cartLineDetailsDTOList[];

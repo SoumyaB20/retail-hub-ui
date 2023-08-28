@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthServiceService } from './auth-service.service';
+// import { AuthServiceService } from './auth-service.service';
 import { cartData } from './data-type';
 
 @Injectable({
@@ -12,11 +12,11 @@ export class CartServiceService {
   userId: any;
   constructor(
     private http: HttpClient,
-    private authService: AuthServiceService
+    // private authService: AuthServiceService
   ) {
-    this.authService.user$.subscribe((user) => {
-      this.userId = user;
-    });
+    // this.authService.user$.subscribe((user) => {
+    //   this.userId = user;
+    // });
   }
 
   private cart: any[] = [];
@@ -41,7 +41,8 @@ export class CartServiceService {
   private url = 'http://localhost:8090/retail-hub/api/order';
 
   showCart(): Observable<any> {
-    return this.http.get(`${this.url}/cart-details?userId=${this.userId}`);
+    const savedUserId = localStorage.getItem('userId');
+    return this.http.get(`${this.url}/cart-details?userId=${savedUserId}`);
   }
 
   deleteOrder(orderId: number, productId: number): Observable<any> {
@@ -59,8 +60,9 @@ export class CartServiceService {
   }
 
   getOrders(): Observable<any[]> {
+    const savedUserId = localStorage.getItem('userId');
     return this.http.get<any[]>(
-      `${this.url}/order-details?userId=${this.userId}`
+      `${this.url}/order-details?userId=${savedUserId}`
     );
   }
 }
