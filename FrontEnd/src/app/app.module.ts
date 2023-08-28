@@ -15,6 +15,7 @@ import { SearchPipe } from './search.pipe';
 import { AlertComponent } from './alert/alert.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrderDetailsComponent,
     SearchPipe,
     AlertComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

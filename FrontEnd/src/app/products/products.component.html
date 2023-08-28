@@ -63,12 +63,7 @@
         <th>Price</th>
         <th>Add Item</th>
       </tr>
-      <tr
-        *ngFor="
-          let data of allProducts
-            | search : searchText : 'productName' : 'productCategory'
-        "
-      >
+      <tr *ngFor="let data of displayedProducts">
         <!-- <td ><input type="checkbox"  /></td> -->
         <td>{{ data.productId }}</td>
         <td style="width: 30%">
@@ -109,9 +104,17 @@
       </tr>
     </table>
   </div>
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+  >
+  </app-pagination>
   <br />
   <!-- <button class="btn1 btn btn-lg btn-primary">Prev</button> -->
-  <button class="btn2 btn btn-lg btn-primary" (click)="OnCart()">View Cart</button>
+  <button class="btn2 btn btn-lg btn-primary" (click)="OnCart()">
+    View Cart
+  </button>
   <br />
   <br />
 </div>

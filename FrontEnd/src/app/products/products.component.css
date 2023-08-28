@@ -222,22 +222,27 @@ h1 {
   background-color: white;
 }
 
-/* .toast-top-right {
-  top: 10px;
-  right: 10px;
-  z-index: 9999;
-}
-.toast-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9999;
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.toastr-show {
-  background-color: #133b5c;
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
 }
 
-.toast-message {
-  color: white;
-} */
+.pagination button:hover {
+  background-color: #f5f5f5;
+}
+
+.pagination span {
+  font-size: 18px;
+  margin: 0 10px;
+}

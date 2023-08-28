@@ -14,6 +14,11 @@ export class ProductsComponent {
   product: Product = new Product();
   allProducts: any[] = []; // array containing all products
 
+  displayedProducts: any[] = [];
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalPages = 0;
+  
   searchText: string = '';
   constructor(
     private toastr: ToastrService,
@@ -30,11 +35,24 @@ export class ProductsComponent {
     this.prodService.showProducts().subscribe(
       (response: any) => {
         this.allProducts = response;
+        this.totalPages = Math.ceil(this.allProducts.length / this.itemsPerPage);
+        this.updateDisplayedProducts();
       },
       (error) => {
         console.error('Error fetching cart details:', error);
       }
     );
+  }
+
+  updateDisplayedProducts(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedProducts = this.allProducts.slice(startIndex, endIndex);
+  }
+
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.updateDisplayedProducts();
   }
 
   OnCart() {
@@ -94,6 +112,16 @@ export class ProductsComponent {
   }
 
   search(event: any) {
-    this.searchText = event.target.value;
+    // this.searchText = event.target.value;
+    this.currentPage = 1; 
+    this.displayedProducts = this.filterProducts();
+  }
+
+  filterProducts(): any[] {
+    const lowerCaseSearchText = this.searchText.toLowerCase();
+    return this.allProducts.filter(product =>
+      product.productName.toLowerCase().includes(lowerCaseSearchText) ||
+      product.productCategory.toLowerCase().includes(lowerCaseSearchText)
+    );
   }
 }
