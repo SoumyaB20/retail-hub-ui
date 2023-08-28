@@ -12,7 +12,7 @@ export class OrderDetailsComponent {
   orderId!: any;
   index!: any;
   total!: any;
-  taxApplied: boolean = false;
+  // taxApplied: boolean = false;
 
   constructor(
     private cartService: CartServiceService,
@@ -29,7 +29,7 @@ export class OrderDetailsComponent {
       this.orderId = OrderId;
     });
     
-    this.taxApplied = this.cartService.getTaxApplied();
+    // this.taxApplied = this.cartService.getTaxApplied();
     this.orderDetails = this.orderService.getCart();
   }
 

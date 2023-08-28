@@ -221,3 +221,23 @@ h1 {
 #search {
   background-color: white;
 }
+
+.toast-top-right {
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+.toast-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.toastr-success {
+  background-color: #133b5c;
+}
+
+.toast-message {
+  color: white;
+}

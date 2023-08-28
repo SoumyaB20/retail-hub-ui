@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CartServiceService } from '../cart-service.service';
 import { cartData, Product } from '../data-type';
 import { ProductService } from '../product.service';
@@ -15,6 +16,7 @@ export class ProductsComponent {
 
   searchText: string = '';
   constructor(
+    private toastr: ToastrService,
     private prodService: ProductService,
     private cartService: CartServiceService,
     private router: Router
@@ -73,6 +75,7 @@ export class ProductsComponent {
           },
         ],
       };
+      this.toastr.success(`You have added ${n.productName} to the cart`, 'Success');
 
       setTimeout(() => {
         this.cartService.addCart(order).subscribe(
