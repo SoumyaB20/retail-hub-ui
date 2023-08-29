@@ -19,7 +19,6 @@ export class CartComponent {
     private router: Router
   ) {}
 
-  total!: any;
   cartDetails: any[] = [];
   totalProductPrice: number = 0; 
   orderId: number = 0;
@@ -85,7 +84,7 @@ export class CartComponent {
   }
   
   applyTaxAndSubmit(): void {
-    this.totalProductPrice += 10; // Add tax
+    this.totalProductPrice += 10; // Add extra charges
     this.closeTaxDialog();
     this.cartService.setTaxApplied(true); 
     this.finalizeOrder();
@@ -99,24 +98,7 @@ export class CartComponent {
       order.totalOrderValue=this.totalProductPrice;
       this.cartService.sendOrderApproved(order).subscribe(
         (response) => {
-          //  alert('your order has been successfully placed');
-        
-
-            // this.flag = true;
-            // setTimeout(() => {
-            //   this.flag = false;
-            // }, 5000);
-        
-          // console.log('Order and details successfully saved:', responses);
-          // this.router.navigate(['/product']);
-  //       },
-  //       (error) => {
-  //         console.error('Error saving order and details:', error);
-  //       }
-  //     );
-  //   }
-  // }
-  successfulOrders.push(response);
+          successfulOrders.push(response);
         if (successfulOrders.length === this.cartDetails.length) {
           this.showAlertAndNavigate();
         }
@@ -139,8 +121,8 @@ showAlertAndNavigate(): void {
 
   onQuantityInput(event: any, index: number): void {
     const inputValue = event.target.value;
-    const numericInput = inputValue.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    this.cartDetails[0].cartLineDetailsDTOList[index].quantity= numericInput; // Update the cart item quantity
+    const numericInput = inputValue.replace(/[^0-9]/g, ''); 
+    this.cartDetails[0].cartLineDetailsDTOList[index].quantity= numericInput; 
     this.calculateTotalProductPrice();
   }
 

@@ -1,4 +1,3 @@
-/* Custom CSS for order status column */
 .order-status {
   font-weight: bold;
   text-transform: uppercase;
@@ -15,9 +14,6 @@
 .cancelled-status {
   color: red;
 }
-
-/* Optional: Add more styles as needed */
-/* Custom CSS for order status badges and cell alignment */
 
 td span {
   display: inline-block;

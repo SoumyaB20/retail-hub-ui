@@ -31,9 +31,7 @@ export class LoginComponent {
         setTimeout(() => {
           this.successMessage = '';
           this.router.navigate(['/product']);
-        }, 1000); 
-
-        // this.router.navigate(['/product']);
+        }, 1000);
       },
       (error: HttpErrorResponse) => {
         this.flag = true;

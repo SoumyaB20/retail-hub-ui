@@ -11,7 +11,6 @@ export class OrderDetailsComponent {
   orderDetails: any[] = [];
   orderId!: any;
   index!: any;
-  total!: any;
   // taxApplied: boolean = false;
 
   constructor(
