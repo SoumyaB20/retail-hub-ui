@@ -61,8 +61,8 @@
       <tr>
         <td></td>
         <td></td>
-        <td></td>
-        <td style="text-align: right">Total: ${{totalProductPrice | number:'1.2-2'  }}</td>
+        <td style="text-align: right">Total</td>
+        <td style="text-align: right"> ${{totalProductPrice | number:'1.2-2'  }}</td>
       </tr>
     </table>
   </div>
@@ -79,7 +79,7 @@
   <div *ngIf="showTaxDialog" class="dialog-overlay">
   <div class="dialog-box">
     <h2>Extra charges</h2>
-    <p>The order value is greater than $500. A extra charges of $10 will be applied.</p>
+    <p>The order value is less than $500. A extra charges of $10 will be applied.</p>
     <button (click)="applyTaxAndSubmit()">Confirm</button>
     <button (click)="closeTaxDialog()">Cancel</button>
   </div>

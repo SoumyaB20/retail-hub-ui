@@ -76,7 +76,7 @@ export class CartComponent {
   }
 
   submitOrder(): void {
-    if (this.totalProductPrice > 500) {
+    if (this.totalProductPrice < 500) {
       this.openTaxDialog();
     } else {
       this.finalizeOrder();

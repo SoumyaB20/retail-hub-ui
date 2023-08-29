@@ -36,19 +36,19 @@
            
 
 
-              <tr *ngIf="orderDetails[index].totalOrderValue > 500">
+              <tr *ngIf="orderDetails[index].totalOrderValue < 500">
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Extra Charges (Applied)</td>
+                <td style="text-align: right">Extra Charges (Applied)</td>
                 <td style="text-align: right;">$10.00</td>
               </tr>
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td style="text-align: right">Total: ${{orderDetails[index].totalOrderValue}}</td>
+                <td style="text-align: right">Total</td>
+                <td style="text-align: right"> ${{orderDetails[index].totalOrderValue}}</td>
               </tr>
             </tbody>
             
