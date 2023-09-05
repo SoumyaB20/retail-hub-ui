@@ -39,11 +39,13 @@ export class CartComponent {
   fetchCartDetails(): void {
     this.cartService.showCart().subscribe(data => {
       this.cartDetails = data;
-      // console.log(data);
       if (this.cartDetails.length > 0) {
         this.orderId = this.cartDetails[0].orderId;
       }
       this.calculateTotalProductPrice();
+    },
+    (error) => {
+      console.error('Error in fetching cart details:', error);
     });
   }
 
@@ -76,11 +78,22 @@ export class CartComponent {
   }
 
   submitOrder(): void {
-    if (this.totalProductPrice < 500) {
+    if (this.totalProductPrice < 500 && this.totalProductPrice>0) {
       this.openTaxDialog();
-    } else {
+    } else if(this.totalProductPrice>0){
       this.finalizeOrder();
+    } else{
+      this.navigateWhenOrderIsEmpty();
     }
+  }
+
+  navigateWhenOrderIsEmpty(): void {
+    this.successMessage = 'Cart is empty, navigating to product page';
+  
+    setTimeout(() => {
+      this.successMessage = '';
+      this.router.navigate(['/product']);
+    }, 2000); 
   }
   
   applyTaxAndSubmit(): void {
@@ -88,7 +101,6 @@ export class CartComponent {
     this.closeTaxDialog();
     this.cartService.setTaxApplied(true); 
     this.finalizeOrder();
-    
   }
 
   finalizeOrder(): void {

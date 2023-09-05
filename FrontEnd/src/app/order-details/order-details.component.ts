@@ -11,6 +11,7 @@ export class OrderDetailsComponent {
   orderDetails: any[] = [];
   orderId!: any;
   index!: any;
+  orderStatusMessage="";
   // taxApplied: boolean = false;
 
   constructor(
@@ -30,6 +31,10 @@ export class OrderDetailsComponent {
     
     // this.taxApplied = this.cartService.getTaxApplied();
     this.orderDetails = this.orderService.getCart();
+    if(this.orderDetails.length<1){
+      // this.orderStatusMessage="To view order details click on the orders";
+      this.OrdersPage();
+    }
   }
 
   OrdersPage() {

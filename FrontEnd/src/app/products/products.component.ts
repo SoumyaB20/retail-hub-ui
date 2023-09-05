@@ -39,7 +39,7 @@ export class ProductsComponent {
         this.updateDisplayedProducts();
       },
       (error) => {
-        console.error('Error fetching cart details:', error);
+        console.error('Error fetching product details:', error);
       }
     );
   }

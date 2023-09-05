@@ -28,7 +28,6 @@ export class AuthServiceService {
      }
 
   loginUser(user: User): Observable<any> {
-    console.log(user);
     return this.http.get(
       `${this.url}/${user.username}?password=${user.password}`
     );

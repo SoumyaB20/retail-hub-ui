@@ -10,7 +10,7 @@ import { CartServiceService } from '../cart-service.service';
 export class OrderComponent {
   orders: any[] = [];
   orderId: any;
-
+  orderStatusMessage="";
   constructor(
     private cartService: CartServiceService,
     private router: Router
@@ -24,8 +24,11 @@ export class OrderComponent {
     this.cartService.getOrders().subscribe(
       (orders) => {
         this.orders = orders;
-        console.log('Fetched orders:', this.orders);
+        // console.log('Fetched orders:', this.orders);
         this.cartService.setCart(this.orders);
+        if(this.orders.length<1){
+          this.orderStatusMessage="Order is empty";
+        }
       },
       (error) => {
         console.error('Error fetching orders:', error);

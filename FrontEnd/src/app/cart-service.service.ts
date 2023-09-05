@@ -11,20 +11,15 @@ export class CartServiceService {
   private taxApplied: boolean = false;
   userId: any;
   constructor(
-    private http: HttpClient,
-    // private authService: AuthServiceService
-  ) {
-    // this.authService.user$.subscribe((user) => {
-    //   this.userId = user;
-    // });
-  }
+    private http: HttpClient
+  ) {}
 
   private cart: any[] = [];
 
   setCart(userId: any[] = []) {
     this.cart = userId;
-    console.log(this.cart);
   }
+  
   setTaxApplied(flag: boolean): void {
     this.taxApplied = flag;
   }
@@ -55,7 +50,7 @@ export class CartServiceService {
   }
 
   sendOrderApproved(cartDetails: any[]): Observable<any> {
-    console.log(cartDetails);
+    // console.log(cartDetails);
     return this.http.post(`${this.url}/submit-order`, cartDetails);
   }
 
