@@ -18,8 +18,9 @@ export class ProductsComponent {
   currentPage = 1;
   itemsPerPage = 10;
   totalPages = 0;
-  
+  requestError='';
   searchText: string = '';
+
   constructor(
     private toastr: ToastrService,
     private prodService: ProductService,
@@ -39,7 +40,11 @@ export class ProductsComponent {
         this.updateDisplayedProducts();
       },
       (error) => {
-        console.error('Error fetching product details:', error);
+        this.requestError = 'request error';
+        setTimeout(() => {
+          this.requestError = '';
+        }, 2000); 
+        // console.error('Error fetching product details:', error);
       }
     );
   }
@@ -101,13 +106,22 @@ export class ProductsComponent {
             this.toastr.success(`You have added ${n.productName} to the cart`, 'Success');
           },
           (error) => {
-            console.error('Error saving order and details:', error);
+            this.requestError = 'request error';
+            setTimeout(() => {
+              this.requestError = '';
+            }, 2000); 
+            // console.error('Error saving order and details:', error);
           }
         );
         n.isLoading = false;
       }, 1000);
     } catch (error) {
-      console.error('Error:', error);
+      this.requestError = 'request error';
+        setTimeout(() => {
+          this.requestError = '';
+          n.isLoading = false;
+        }, 2000); 
+      // console.error('Error:', error);
     }
   }
 

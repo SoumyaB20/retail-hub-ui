@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { CartServiceService } from '../cart-service.service';
 
 @Component({
@@ -15,7 +15,6 @@ export class OrderDetailsComponent {
   // taxApplied: boolean = false;
 
   constructor(
-    private cartService: CartServiceService,
     private orderService: CartServiceService,
     private router: Router,
     private route: ActivatedRoute

@@ -11,6 +11,7 @@ export class OrderComponent {
   orders: any[] = [];
   orderId: any;
   orderStatusMessage="";
+  requestError="";
   constructor(
     private cartService: CartServiceService,
     private router: Router
@@ -31,6 +32,10 @@ export class OrderComponent {
         }
       },
       (error) => {
+        this.requestError = 'request error';
+        setTimeout(() => {
+          this.requestError = '';
+        }, 2000); 
         console.error('Error fetching orders:', error);
       }
     );

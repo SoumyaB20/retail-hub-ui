@@ -12,7 +12,7 @@ export class CartComponent {
   successMessage: string = '';
   showTaxDialog: boolean = false;
   taxApplied: boolean = false;
-  
+  requestError='';
 
   constructor(
     private cartService: CartServiceService,
@@ -45,6 +45,10 @@ export class CartComponent {
       this.calculateTotalProductPrice();
     },
     (error) => {
+      this.requestError = 'request error';
+      setTimeout(() => {
+        this.requestError = '';
+      }, 2000); 
       console.error('Error in fetching cart details:', error);
     });
   }
@@ -71,6 +75,11 @@ export class CartComponent {
           this.fetchCartDetails();
         },
         (error) => {
+            this.requestError = 'request error';
+            setTimeout(() => {
+              this.requestError = '';
+            }, 2000); 
+      
           console.error('Error deleting cart:', error);
         }
       );
@@ -116,6 +125,10 @@ export class CartComponent {
         }
       },
       (error) => {
+        this.requestError = 'request error';
+        setTimeout(() => {
+          this.requestError = '';
+        }, 2000); 
         console.error('Error saving order and details:', error);
       }
     );
